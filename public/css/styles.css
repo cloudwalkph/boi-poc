@@ -1,0 +1,124 @@
+@font-face {
+    font-family: 'DroidSerif';
+    src: url(../assets/fonts/DroidSerif.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'DroidSerifBold';
+    src: url(../assets/fonts/DroidSerif-Bold.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'LibreFranklin-Regular';
+    src: url(../assets/fonts/LibreFranklin-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'LibreFranklin-Light';
+    src: url(../assets/fonts/LibreFranklin-Light.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'LibreFranklin-Bold';
+    src: url(../assets/fonts/LibreFranklin-Bold.ttf) format('truetype');
+}
+
+body {
+    background-color: #ffffff;
+}
+
+body, div, button, input, select, p {
+
+    font-family: "LibreFranklin-Regular" !important;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: "DroidSerifBold" !important;
+}
+
+.text-primary {
+    color: #aca36c !important;
+}
+
+.btn.btn-primary {
+    background-color: #aca36c!important;
+    border-color: #aca36c!important;
+}
+.btn.btn-primary:hover {
+    background-color: #ac9665 !important;
+    border-color: #ac9665!important;
+}
+.navbar.navbar-default.navbar-static-top {
+    height: 70px !important;
+    margin-bottom: 0 !important;
+}
+.navbar {
+    position: relative;
+}
+.navbar-brand.center {
+    position: absolute;
+    left: 50%;
+    margin-left: -150px !important;  /* 50% of your logo width */
+    display: block;
+}
+.navbar .navbar-nav>li {
+    padding: 10px;
+}
+
+#headerImg {
+    background: url(../assets/images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 70vh;
+    position: relative;
+}
+
+.img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #aca36c;
+    z-index: 100;
+    opacity: 0.8;
+    height: 100%;
+}
+
+.registration-text {
+    position: absolute;
+    top: 32%;
+    left: 32%;
+    color: #fff;
+    z-index: 100;
+}
+.registration-text h1 {
+    font-size: 5em;
+}
+
+.registration-img {
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    margin-left: -100px;
+    z-index: 100;
+    height:200px;
+    width: 200px;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+}
