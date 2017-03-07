@@ -28,50 +28,46 @@
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container-fluid">
             <div class="navbar-header">
-
-                @if (Auth::guest())
-                    <a class="navbar-brand center" href="{{ url('/') }}">
-                        <img src="/assets/images/logo.png" alt="">
-                    </a>
-                @else
                 <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="/assets/images/logo.png" alt="">
-                    </a>
-                @endif
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="/assets/images/logo.png" alt="">
+                </a>
             </div>
 
-            @if (!Auth::guest())
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Right Side Of Navbar -->
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Right Side Of Navbar -->
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#">ABOUT</a></li>
-                        <li><a href="#">FORMS</a></li>
-                        <li><a href="#">SERVICES</a></li>
-                        {{--<li class="dropdown">--}}
-                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
-                        {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
-                        {{--</a>--}}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">FORMS</a></li>
+                    <li><a href="#">SERVICES</a></li>
+                    @if (Auth::guest())
+                        <li><a href="{{ route('login') }}">LOGIN</a></li>
+                        <li><a href="{{ route('register') }}">REGISTER</a></li>
+                    @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
 
-                        {{--<ul class="dropdown-menu" role="menu">--}}
-                        {{--<li>--}}
-                        {{--<a href="{{ route('logout') }}"--}}
-                        {{--onclick="event.preventDefault();--}}
-                        {{--document.getElementById('logout-form').submit();">--}}
-                        {{--Logout--}}
-                        {{--</a>--}}
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
 
-                        {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                        {{--{{ csrf_field() }}--}}
-                        {{--</form>--}}
-                        {{--</li>--}}
-                        {{--</ul>--}}
-                        {{--</li>--}}
-                    </ul>
-                </div>
-            @endif
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+                </ul>
+            </div>
 
         </div>
     </nav>

@@ -18,3 +18,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/', function () {
     return view('register');
 });
+
+Route::get('/payment', function () {
+    return view('payment');
+});

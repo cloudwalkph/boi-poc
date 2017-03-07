@@ -16,7 +16,7 @@
                     <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="control-label">Name</label>
-                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
                             @if ($errors->has('name'))
                                 <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -28,7 +28,7 @@
                     <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="control-label">E-mail Address</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>
@@ -152,7 +152,10 @@
                         <div class="form-group{{ $errors->has('visa_type') ? ' has-error' : '' }}">
                             <label for="visa_type" class="control-label">Visa Type</label>
 
-                            <input id="visa_type" type="text" class="form-control" name="visa_type" value="{{ old('visa_type') }}" required>
+                            <select name="visa_type" id="visa_type" class="form-control">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
                             @if ($errors->has('visa_type'))
                                 <span class="help-block">
                                 <strong>{{ $errors->first('visa_type') }}</strong>

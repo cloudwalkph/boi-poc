@@ -108,6 +108,69 @@ a {
     width: 200px;
 }
 
+.cc-selector div {
+    margin: 15px 0;
+}
+
+.cc-selector input {
+    margin: 0;
+    padding: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: none;
+}
+
+.cc-selector .input-parent{
+    border: solid 1px #aca36c;
+    border-radius: 5px;
+    padding: 15px 50px;
+    width: 100%;
+}
+
+.cc-selector-2 input{
+    position:absolute;
+    z-index:999;
+}
+
+.cc-selector-2 input:active +.drinkcard-cc, .cc-selector input:active +.drinkcard-cc{opacity: .9;}
+.cc-selector-2 input:checked +.drinkcard-cc, .cc-selector input:checked +.drinkcard-cc{
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+}
+.drinkcard-cc{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width: 100%;
+    height: 100px;
+    -webkit-transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+    -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+    filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.drinkcard-cc:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+    -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+    filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+.masterCard{
+    background-image:url(../assets/images/master.png);
+}
+.bancnet{
+    background-image:url(../assets/images/bancnet.png);
+}
+.gcash{
+    background-image:url(../assets/images/gcash.jpg);
+}
+.paypal{
+    background-image:url(../assets/images/paypal.png);
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
