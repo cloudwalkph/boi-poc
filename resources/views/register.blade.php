@@ -1,17 +1,19 @@
-@extends('layouts.app')
+@extends('layouts.register')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p style="margin: 30px 10px 80px 10px; font-size: 16px">Register a certification for your stay here in the Philippines online from the Bureau of Immigration.
+                <p style="margin: 30px 10px 80px 10px; font-size: 16px">
+                    Register a certification for your stay here in the Philippines online from the Bureau of Immigration.
                     This online service was created to make the registration and filling of your extension more convenient.
-                    Please fill up the required fields below. Thank you for patronizing this service!</p>
+                    Please fill up the required fields below. Thank you for patronizing this service!
+                </p>
 
                 <form class="row" role="form" method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="control-label">Name</label>
                             <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -23,7 +25,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="gender" class="control-label">Gender</label>
 
@@ -39,7 +41,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
                             <label for="birthday" class="control-label">Birthday</label>
 
@@ -52,7 +54,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('height') ? ' has-error' : '' }}">
                             <label for="height" class="control-label">Height</label>
 
@@ -65,7 +67,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('civil_status') ? ' has-error' : '' }}">
                             <label for="civil_status" class="control-label">Civil Status</label>
 
@@ -82,7 +84,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('blood_type') ? ' has-error' : '' }}">
                             <label for="blood_type" class="control-label">Blood Type</label>
 
@@ -95,7 +97,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('certificate') ? ' has-error' : '' }}">
                             <label for="certificate" class="control-label">Certificate of Residency (For New Registrations)</label>
 
@@ -108,7 +110,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                             <label for="address" class="control-label">Address</label>
 
@@ -121,7 +123,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('visa_type') ? ' has-error' : '' }}">
                             <label for="visa_type" class="control-label">Visa Type</label>
 
@@ -134,7 +136,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('visa_status') ? ' has-error' : '' }}">
                             <label for="visa_status" class="control-label">Visa Status</label>
 
@@ -147,7 +149,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('visa_issue_date') ? ' has-error' : '' }}">
                             <label for="visa_issue_date" class="control-label">Visa Issue Date</label>
 
@@ -160,7 +162,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('visa_expiration') ? ' has-error' : '' }}">
                             <label for="visa_expiration" class="control-label">Visa Expiration</label>
 

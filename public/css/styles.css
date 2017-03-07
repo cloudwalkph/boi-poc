@@ -27,11 +27,13 @@ body {
 }
 
 body, div, button, input, select, p {
-
     font-family: "LibreFranklin-Regular" !important;
 }
 h1,h2,h3,h4,h5,h6{
     font-family: "DroidSerifBold" !important;
+}
+a {
+    font-family: "LibreFranklin-Bold" !important;
 }
 
 .text-primary {
@@ -69,7 +71,7 @@ h1,h2,h3,h4,h5,h6{
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height: 70vh;
+    height: 65vh;
     position: relative;
 }
 
@@ -121,4 +123,15 @@ body {
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 60px;
+}
+.footer h6 {
+    font-family: "LibreFranklin-Regular" !important;
+}
+
+.footer .social-icons i {
+    margin: 15px 10px;
+}
+.footer a {
+    font-family: "LibreFranklin-Bold" !important;
+    color: #333;
 }
