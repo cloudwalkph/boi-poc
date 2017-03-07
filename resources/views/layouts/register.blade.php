@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Bureau of Immigration</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -48,7 +48,7 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->profile->getFullNameAttribute() }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
@@ -74,54 +74,21 @@
 
     <div class="content" id="headerImg">
         <div class="img-overlay"></div>
-        @if (Auth::guest())
-            <div class="registration-text text-center">
-                <h1 style="color: #fff;">Alien Certificate</h1>
-                <h3 style="color: #fff;">Registration / Renewal</h3>
-            </div>
-            <img src="/assets/images/id.png" class="registration-img" alt="ID">
-        @endif
+        <div class="registration-text text-center">
+            <h1 style="color: #fff;">My Profile</h1>
+        </div>
+        <img src="/assets/images/id.png" class="registration-img" alt="ID">
     </div>
 
-    @if (Auth::guest())
-        <div class="content" style="margin: 150px 0">
-            @yield('content')
-        </div>
-    @else
+    <div class="content" style="margin: 150px 0">
         @yield('content')
-    @endif
+    </div>
+
 </div>
 
+@include('components.footer')
 
-<footer class="footer">
 
-    <div class="container-fluid">
-        <div class="col-md-3">
-            <img src="/assets/images/logo-footer.png" alt="">
-        </div>
-        <div class="col-md-4 text-center">
-            <h6 style="margin: 20px">Copyright 2016 <span class="text-primary">BUREAU OF IMMIGRATION</span> | All Rights Reserved</h6>
-        </div>
-        <div class="col-md-2">
-            <div class="social-icons text-center">
-                <i class="fa fa-twitter fa-2x"></i>
-                <i class="fa fa-facebook fa-2x"></i>
-                <i class="fa fa-youtube fa-2x"></i>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">TERMS</a></li>
-                    <li><a href="#">POLICIES</a></li>
-                    <li><a href="#">CONTACT</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
