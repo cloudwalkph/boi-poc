@@ -49,9 +49,9 @@
 
                     <div class="form-group">
                         <div class="col-md-12 text-right">
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                Forgot Your Password?
-                            </a>
+                            {{--<a class="btn btn-link" href="{{ route('password.request') }}">--}}
+                                {{--Forgot Your Password?--}}
+                            {{--</a>--}}
                             <button type="submit" class="btn btn-primary">
                                 Login
                             </button>
