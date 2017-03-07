@@ -26,6 +26,18 @@
                     </div>
 
                     <div class="col-md-6" style="margin: 20px 0;">
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="control-label">E-mail Address</label>
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" style="margin: 20px 0;">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="gender" class="control-label">Gender</label>
 
@@ -62,6 +74,19 @@
                             @if ($errors->has('height'))
                                 <span class="help-block">
                                 <strong>{{ $errors->first('height') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" style="margin: 20px 0;">
+                        <div class="form-group{{ $errors->has('weight') ? ' has-error' : '' }}">
+                            <label for="weight" class="control-label">Weight</label>
+
+                            <input id="weight" type="text" class="form-control" name="weight" value="{{ old('weight') }}" required>
+                            @if ($errors->has('weight'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('weight') }}</strong>
                             </span>
                             @endif
                         </div>

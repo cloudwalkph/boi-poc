@@ -43,6 +43,7 @@ a {
 .btn.btn-primary {
     background-color: #aca36c!important;
     border-color: #aca36c!important;
+    font-family: "LibreFranklin-Bold" !important;
 }
 .btn.btn-primary:hover {
     background-color: #ac9665 !important;
@@ -89,7 +90,7 @@ a {
 .registration-text {
     position: absolute;
     top: 32%;
-    left: 32%;
+    left: 33%;
     color: #fff;
     z-index: 100;
 }
