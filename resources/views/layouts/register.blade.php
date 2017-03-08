@@ -77,7 +77,7 @@
         <div class="registration-text text-center">
             <h1 style="color: #fff;">My Profile</h1>
         </div>
-        <img src="/assets/images/{{ isset(Auth::user()->profile->profile_picture) ? Auth::user()->profile->profile_picture : 'id' }}.png" class="registration-img" alt="ID">
+        <img src="/assets/images/{{ isset(Auth::user()->profile->profile_picture) ? Auth::user()->profile->profile_picture : 'id.png' }}" class="registration-img" alt="ID">
     </div>
 
     <div class="content" style="margin: 150px 0">
