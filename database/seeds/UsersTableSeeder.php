@@ -37,6 +37,7 @@ class UsersTableSeeder extends Seeder
             'visa_status'   => "working",
             'visa_issue_date'   => "2013-08-22",
             'visa_expiration'   => "2017-08-22",
+            'profile_picture' => 'campbell.jpg'
         ]);
 
         $user = User::create([
@@ -62,6 +63,7 @@ class UsersTableSeeder extends Seeder
             'visa_status'   => "permanent",
             'visa_issue_date'   => "",
             'visa_expiration'   => "permanent",
+            'profile_picture' => 'robinson.png'
         ]);
 
         $user = User::create([
@@ -87,6 +89,7 @@ class UsersTableSeeder extends Seeder
             'visa_status'   => "working",
             'visa_issue_date'   => "2014-09-06",
             'visa_expiration'   => "2017-09-06",
+            'profile_picture' => 'thompson.png'
         ]);
 
 

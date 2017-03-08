@@ -31,6 +31,7 @@ class CreateUserProfilesTable extends Migration
             $table->enum('visa_status', ['working', 'permanent'])->default('working');
             $table->string('visa_issue_date')->nullable();
             $table->string('visa_expiration')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
     }
