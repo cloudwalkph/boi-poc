@@ -199,8 +199,8 @@
                             <label for="profile[visa_status]" class="control-label">Visa Status</label>
 
                             <select name="profile[visa_status]" id="profile[visa_status]" class="form-control">
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="working">Working</option>
+                                <option value="permanent">Permanent</option>
                             </select>
                             @if ($errors->has('profile.visa_status'))
                                 <span class="help-block">

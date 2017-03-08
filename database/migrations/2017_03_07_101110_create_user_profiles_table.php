@@ -28,7 +28,7 @@ class CreateUserProfilesTable extends Migration
             $table->string('certificate')->nullable();
             $table->string('address')->nullable();
             $table->string('visa_type')->nullable();
-            $table->enum('visa_status', ['active', 'inactive'])->default('active');
+            $table->enum('visa_status', ['working', 'permanent'])->default('working');
             $table->string('visa_issue_date')->nullable();
             $table->string('visa_expiration')->nullable();
             $table->timestamps();
