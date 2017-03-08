@@ -5,7 +5,7 @@
             <img src="/assets/images/logo-footer.png" alt="">
         </div>
         <div class="col-md-4 text-center">
-            <h6 style="margin: 20px">Copyright 2016 <span class="text-primary">BUREAU OF IMMIGRATION</span> | All Rights Reserved</h6>
+            <h6 style="margin: 20px">Copyright 2017 <span class="text-primary">BUREAU OF IMMIGRATION</span> | All Rights Reserved</h6>
         </div>
         <div class="col-md-2">
             <div class="social-icons text-center">
