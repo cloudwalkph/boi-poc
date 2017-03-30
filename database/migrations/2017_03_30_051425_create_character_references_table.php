@@ -15,6 +15,7 @@ class CreateCharacterReferencesTable extends Migration
     {
         Schema::create('character_references', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name')->nullable();
@@ -23,7 +24,7 @@ class CreateCharacterReferencesTable extends Migration
             $table->string('country')->default('Philippines');
             $table->string('zip_code');
             $table->string('landline_number');
-            $table->string('mobile_numbeer');
+            $table->string('mobile_number');
             $table->timestamps();
             $table->softDeletes();
         });
