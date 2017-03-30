@@ -56,20 +56,24 @@ a {
     border-color: #ac9665!important;
 }
 .navbar.navbar-default.navbar-static-top {
-    height: 70px !important;
     margin-bottom: 0 !important;
 }
 .navbar {
     position: relative;
 }
+
 .navbar-brand.center {
     position: absolute;
     left: 50%;
     margin-left: -150px !important;  /* 50% of your logo width */
     display: block;
 }
-.navbar .navbar-nav>li {
-    padding: 10px;
+.navbar-brand {
+    padding: 14px 15px;
+}
+
+.navbar-right ul.dropdown-menu {
+    min-width: 200px;
 }
 
 #headerImg {
@@ -78,7 +82,7 @@ a {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height: 65vh;
+    height: 45vh;
     position: relative;
 }
 
@@ -122,8 +126,8 @@ a {
 
 .registration-text {
     position: absolute;
-    top: 32%;
-    left: 50%;
+    bottom: 6%;
+    left: 36%;
     color: #fff;
     z-index: 100;
     margin-left: -160px;
@@ -135,11 +139,26 @@ a {
 .registration-img {
     position: absolute;
     bottom: -20%;
-    left: 50%;
+    left: 15%;
     margin-left: -100px;
     z-index: 100;
-    height:200px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
+    border: 10px #AAA36C solid;
+    border-radius: 5px;
+}
+
+.button-container {
+    position: absolute;
+    bottom: -17%;
+    left: 25%;
+    display: flex;
+}
+
+.button-container a.btn {
+    margin: 0 20px;
+    padding: 12px 40px;
+    letter-spacing: 3px;
 }
 
 .cc-selector div {

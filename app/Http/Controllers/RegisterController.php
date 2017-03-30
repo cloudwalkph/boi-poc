@@ -27,7 +27,7 @@ class RegisterController extends Controller
     {
         $user = Auth::user();
 
-        return view('register', compact('user'));
+        return view('home', compact('user'));
     }
 
     /**

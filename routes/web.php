@@ -17,7 +17,7 @@ Route::get('/home', 'RegisterController@index');
 Route::post('/update', 'RegisterController@update');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('register');
 });
 
 Route::get('/payment', function () {
