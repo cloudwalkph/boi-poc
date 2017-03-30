@@ -23,14 +23,8 @@ class CreateUserProfilesTable extends Migration
             $table->date('birthday')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
+            $table->string('birth_country')->nullable();
             $table->enum('civil_status', ['single', 'married', 'widowed'])->default('single');
-            $table->string('blood_type')->nullable();
-            $table->string('certificate')->nullable();
-            $table->string('address')->nullable();
-            $table->string('visa_type')->nullable();
-            $table->enum('visa_status', ['working', 'permanent'])->default('working');
-            $table->string('visa_issue_date')->nullable();
-            $table->string('visa_expiration')->nullable();
             $table->string('profile_picture')->nullable();
             $table->timestamps();
         });
