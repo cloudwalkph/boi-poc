@@ -173,10 +173,9 @@
                             </div>
 
                         </div>
-
                         <div class="form-group">
                             <div class="col-md-3 col-md-offset-9">
-                                <button type="submit" class="btn btn-primary btn-block">
+                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#offerIdModal">
                                     CHECKOUT
                                 </button>
                             </div>
@@ -187,6 +186,7 @@
             </div>
         </div>
     </div>
+    @include('modals.offer')
 
 @endsection
 

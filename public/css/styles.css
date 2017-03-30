@@ -49,16 +49,27 @@ a {
     font-size: 14px;
 }
 
+.btn.btn-default {
+    background-color: #878882;
+    border-color: #878882;
+    color: #fff;
+}
+.btn.btn-default:hover {
+    background-color: #444444;
+    border-color: #444444;
+    color: #fff;
+}
+
 .btn.btn-primary {
-    background-color: #aca36c!important;
-    border-color: #aca36c!important;
+    background-color: #aca36c;
+    border-color: #aca36c;
 }
 .btn.btn-primary:hover {
-    background-color: #948c5b !important;
-    border-color: #948c5b!important;
+    background-color: #948c5b ;
+    border-color: #948c5b;
 }
 .navbar.navbar-default.navbar-static-top {
-    margin-bottom: 0 !important;
+    margin-bottom: 0 ;
 }
 .navbar {
     position: relative;
@@ -267,6 +278,11 @@ a {
     color: #fff;
     font-weight: bold;
     font-family: "LibreFranklin-Regular" !important;
+}
+
+.offer-content {
+    padding: 20px 30px 0 30px;
+    line-height: 28px;
 }
 
 /* Sticky footer styles
