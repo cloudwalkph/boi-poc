@@ -43,8 +43,10 @@ a {
 .text-primary {
     color: #aca36c !important;
 }
-.btn-default {
-    color: #aca36c !important;
+
+.btn {
+    padding: 12px 30px;
+    font-size: 14px;
 }
 
 .btn.btn-primary {
@@ -52,8 +54,8 @@ a {
     border-color: #aca36c!important;
 }
 .btn.btn-primary:hover {
-    background-color: #ac9665 !important;
-    border-color: #ac9665!important;
+    background-color: #948c5b !important;
+    border-color: #948c5b!important;
 }
 .navbar.navbar-default.navbar-static-top {
     margin-bottom: 0 !important;
@@ -76,6 +78,11 @@ a {
     min-width: 200px;
 }
 
+.schedule-payment-breakdown .table>tbody>tr>td {
+    border-top: none;
+    font-size: 16px;
+}
+
 #headerImg {
     background: url(../assets/images/background.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -87,13 +94,14 @@ a {
 }
 
 #scheduleImg {
-    background: url(../assets/images/background.jpg) no-repeat center center fixed;
+    background: url(../assets/images/schedule.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     height: 45vh;
     position: relative;
+    background-position-y: -150px;
 }
 
 #authImg {
@@ -241,6 +249,24 @@ a {
 }
 .paypal{
     background-image:url(../assets/images/paypal.png);
+}
+
+.schedule-summary {
+    padding: 30px;
+}
+.schedule-payment-breakdown .note-payment {
+    background: #948c5b;
+    margin: 0 -15px;
+    width: 102.7%;
+    font-size: 15px;
+    padding: 10px;
+    text-align: center;
+}
+
+.schedule-payment-breakdown .note-payment h5 {
+    color: #fff;
+    font-weight: bold;
+    font-family: "LibreFranklin-Regular" !important;
 }
 
 /* Sticky footer styles
