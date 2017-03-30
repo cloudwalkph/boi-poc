@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserAddressesTable extends Migration
+class CreateCharacterReferencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreateUserAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_addresses', function (Blueprint $table) {
+        Schema::create('character_references', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-//            $table->enum('type', ['ph', 'foreign'])->default('foreign');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('middle_name')->nullable();
             $table->string('street');
             $table->string('city');
-            $table->string('country');
+            $table->string('country')->default('Philippines');
             $table->string('zip_code');
+            $table->string('landline_number');
+            $table->string('mobile_numbeer');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +36,6 @@ class CreateUserAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_addresses');
+        Schema::dropIfExists('character_references');
     }
 }
