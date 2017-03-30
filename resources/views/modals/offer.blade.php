@@ -25,7 +25,7 @@
             </div>
             <div class="modal-footer">
                 <div class="col-md-6">
-                    <button type="button" class="btn btn-default btn-block" data-dismiss="modal">SKIP</button>
+                    <button type="button" class="btn btn-black btn-block" data-dismiss="modal">SKIP</button>
                 </div>
                 <div class="col-md-6">
                     <a href="/schedule-confirmation" class="btn btn-primary btn-block">YES, PURCHASE ACR ID</a>

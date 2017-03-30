@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content" id="scheduleImg">
-        <div class="img-overlay"></div>
+        <div class="auth-overlay"></div>
         <div class="schedule-heading">
             <h1 style="color: #fff">Schedule your Appointment</h1>
         </div>

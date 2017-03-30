@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content" id="scheduleConfirmedImg">
-        <div class="img-overlay"></div>
+        <div class="auth-overlay"></div>
         <div class="schedule-confirmation-heading">
             <h1 style="color: #fff">Your appointment is confirmed!</h1>
         </div>

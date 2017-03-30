@@ -1,6 +1,6 @@
 
     <div class="row">
-        <div class="col-md-12" style="z-index: 100; padding: 50px 80px;">
+        <div class="col-md-12" id="registerContent">
             <h2>Register</h2>
                 <form class="" role="form" method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
