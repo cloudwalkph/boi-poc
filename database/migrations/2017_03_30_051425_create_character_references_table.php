@@ -24,7 +24,7 @@ class CreateCharacterReferencesTable extends Migration
             $table->string('country')->default('Philippines');
             $table->string('zip_code');
             $table->string('landline_number');
-            $table->string('mobile_numbeer');
+            $table->string('mobile_number');
             $table->timestamps();
             $table->softDeletes();
         });
