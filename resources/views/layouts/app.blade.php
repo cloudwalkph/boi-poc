@@ -41,7 +41,6 @@
                     <li><a href="#">HOME</a></li>
                     <li><a href="#">ABOUT</a></li>
                     <li><a href="#">FORMS</a></li>
-                    <li><a href="#">SERVICES</a></li>
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">LOGIN</a></li>
                         <li><a href="{{ route('register') }}">REGISTER</a></li>
@@ -71,14 +70,7 @@
 
         </div>
     </nav>
-
-    <div class="content" id="headerImg">
-        <div class="img-overlay"></div>
-    </div>
-
-    <div class="content" style="margin: 100px 0; min-height: 50vh">
-        @yield('content')
-    </div>
+    @yield('content')
 </div>
 
 
