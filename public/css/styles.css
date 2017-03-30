@@ -115,6 +115,17 @@ a {
     background-position-y: -150px;
 }
 
+#scheduleConfirmedImg {
+    background: url(../assets/images/schedule_confirmed.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 45vh;
+    position: relative;
+    background-position-y: -150px;
+}
+
 #authImg {
     background: url(../assets/images/bg-auth.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -158,8 +169,19 @@ a {
     top: 35%;
     left: 22%;
     color: #fff;
-    z-index: 100;
     text-transform: uppercase;
+    z-index: 100;
+}
+
+.schedule-confirmation-heading {
+    position: absolute;
+    top: 35%;
+    left: 26%;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    width: 800px;
+    z-index: 100;
 }
 
 .registration-text {

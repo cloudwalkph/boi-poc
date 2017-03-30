@@ -28,7 +28,7 @@
                     <button type="button" class="btn btn-default btn-block" data-dismiss="modal">SKIP</button>
                 </div>
                 <div class="col-md-6">
-                    <button type="button" class="btn btn-primary btn-block">YES, PURCHASE ACR ID</button>
+                    <a href="/schedule-confirmation" class="btn btn-primary btn-block">YES, PURCHASE ACR ID</a>
                 </div>
             </div>
         </div>

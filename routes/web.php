@@ -20,6 +20,9 @@ Route::get('/', function () {
     return view('register');
 });
 
-Route::get('/payment', function () {
+Route::get('/schedule', function () {
     return view('schedule');
+});
+Route::get('/schedule-confirmation', function () {
+    return view('schedule_confirmed');
 });
