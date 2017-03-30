@@ -86,6 +86,16 @@ a {
     position: relative;
 }
 
+#scheduleImg {
+    background: url(../assets/images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 45vh;
+    position: relative;
+}
+
 #authImg {
     background: url(../assets/images/bg-auth.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -122,6 +132,15 @@ a {
 
 #loginForm input {
     color: #ffffff;
+}
+
+.schedule-heading {
+    position: absolute;
+    top: 35%;
+    left: 22%;
+    color: #fff;
+    z-index: 100;
+    text-transform: uppercase;
 }
 
 .registration-text {

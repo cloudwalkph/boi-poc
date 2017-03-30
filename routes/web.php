@@ -21,5 +21,5 @@ Route::get('/', function () {
 });
 
 Route::get('/payment', function () {
-    return view('payment');
+    return view('schedule');
 });

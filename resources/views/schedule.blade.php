@@ -1,12 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content" id="headerImg">
+    <div class="content" id="scheduleImg">
         <div class="img-overlay"></div>
+        <div class="schedule-heading">
+            <h1 style="color: #fff">Schedule your Appointment</h1>
+        </div>
     </div>
 
-    <div class="content" style="margin: 100px 0; min-height: 50vh">
-        <div class="container" style="min-height: 80vh">
+    <div class="content" style="margin: 100px 0">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <h1>Mode of payment</h1>
