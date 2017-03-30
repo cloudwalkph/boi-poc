@@ -2,6 +2,10 @@
 
 namespace App;
 
+use App\Models\CharacterReference;
+use App\Models\TravelInformation;
+use App\Models\UserAddress;
+use App\Models\UserAlias;
 use App\Models\UserProfile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,5 +56,25 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(UserProfile::class);
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+
+    public function travelInformations()
+    {
+        return $this->hasMany(TravelInformation::class);
+    }
+
+    public function characterReferences()
+    {
+        return $this->hasMany(CharacterReference::class);
+    }
+
+    public function aliases()
+    {
+        return $this->hasMany(UserAlias::class);
     }
 }
