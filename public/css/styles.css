@@ -98,6 +98,14 @@ a {
     background-position: -250px;
 }
 
+#extensionImg {
+    background: url(../assets/images/Visa_Renew.jpg) no-repeat top fixed;
+    background-size: 100%;
+    width: 100%;
+    height: 34vh;
+    position: relative;
+}
+
 .img-overlay {
     position: absolute;
     top: 0;
@@ -253,4 +261,8 @@ body {
 .footer a {
     font-family: "LibreFranklin-Bold" !important;
     color: #333;
+}
+
+.rowMargin {
+    margin-bottom: 25px;
 }
