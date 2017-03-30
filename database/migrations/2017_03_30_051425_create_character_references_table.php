@@ -15,6 +15,7 @@ class CreateCharacterReferencesTable extends Migration
     {
         Schema::create('character_references', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name')->nullable();
