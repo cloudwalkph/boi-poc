@@ -24,12 +24,10 @@ class CreateUsersRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'                  => 'required|email',
             'profile.first_name'     => 'required',
             'profile.last_name'      => 'required',
             'profile.birthday'       => 'required|date',
             'profile.gender'         => 'required',
-            'profile.address'        => 'required'
         ];
     }
 }

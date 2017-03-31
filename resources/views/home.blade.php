@@ -2,26 +2,27 @@
 
 @section('content')
 
-    <div class="content" id="headerImg">
-        <div class="img-overlay"></div>
-        <div class="registration-text">
-            <h2 style="color: #fff;">{{ Auth::user()->profile->getFullNameAttribute() }}</h2>
-            <h4 style="color: #fff;">Online Application Form</h4>
+    <form role="form" method="POST" action="/update">
+        <div class="content" id="headerImg">
+            <div class="img-overlay"></div>
+            <div class="registration-text">
+                <h2 style="color: #fff;">{{ Auth::user()->profile->getFullNameAttribute() }}</h2>
+                <h4 style="color: #fff;">Online Application Form</h4>
+            </div>
+            <img src="/assets/images/{{ isset(Auth::user()->profile->profile_picture) ? Auth::user()->profile->profile_picture : 'id.png' }}"
+                 class="registration-img" alt="ID">
+
+            <div class="button-container">
+                <a href="/extension" class="btn btn-primary">APPLY FOR EXTENSION</a>
+                <a href="/visa-history" class="btn btn-primary">VISA HISTORY</a>
+            </div>
+
         </div>
-        <img src="/assets/images/{{ isset(Auth::user()->profile->profile_picture) ? Auth::user()->profile->profile_picture : 'id.png' }}"
-             class="registration-img" alt="ID">
 
-        <div class="button-container">
-            <a href="#" class="btn btn-primary">APPLY FOR EXTENSION</a>
-            <a href="/visa-history" class="btn btn-primary">VISA HISTORY</a>
-        </div>
-
-    </div>
-
-    <div class="content" style="margin: 150px 0">
-        <div class="container">
-            <div class="col-md-12">
-                <form role="form" method="POST" action="/update">
+        <div class="content" style="margin: 150px 0">
+            <div class="container">
+                <div class="col-md-12">
+                    @include('components.errors')
                     {{ csrf_field() }}
 
                     <div class="row">
@@ -70,20 +71,20 @@
 
                     <div class="row">
                         <div class="col-md-6" style="margin: 20px 0;">
-                            <div class="form-group{{ $errors->has('profile.alias') ? ' has-error' : '' }}">
-                                <label for="profile[alias]" class="control-label">Other Name(s)/Alias(es)</label>
-                                <input id="profile[alias]" type="text" class="form-control" name="profile[alias]"
-                                       value="{{ isset($user->profile->alias) ? $user->profile->alias : '' }}" >
-                                @if ($errors->has('profile.alias'))
+                            <div class="form-group{{ $errors->has('alias.alias') ? ' has-error' : '' }}">
+                                <label for="alias[alias]" class="control-label">Other Name(s)/Alias(es)</label>
+                                <input id="alias[alias]" type="text" class="form-control" name="alias[alias]"
+                                       value="{{ isset($user->alias->alias) ? $user->alias->alias : '' }}" >
+                                @if ($errors->has('alias.alias'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('profile.alias') }}</strong>
+                                        <strong>{{ $errors->first('alias.alias') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="col-md-6" style="margin: 20px 0;">
-                            <button class="btn btn-primary"> Add Another Alias</button>
+                            {{--<button class="btn btn-primary"> Add Another Alias</button>--}}
                         </div>
                     </div>
 
@@ -246,73 +247,73 @@
                         </div>
 
                         <div class="col-md-6" style="margin: 20px 0;">
-                            <div class="form-group{{ $errors->has('travel_information.passport_number') ? ' has-error' : '' }}">
-                                <label for="travel_information[passport_number]" class="control-label">Passport Number</label>
+                            <div class="form-group{{ $errors->has('travelInformation.passport_number') ? ' has-error' : '' }}">
+                                <label for="travelInformation[passport_number]" class="control-label">Passport Number</label>
 
-                                <input id="travel_information[passport_number]" type="text" class="form-control" name="travel_information[passport_number]"
-                                       value="{{ isset($user->travel_information->passport_number) ? $user->travel_information->passport_number : '' }}" >
-                                @if ($errors->has('travel_information.passport_number'))
+                                <input id="travelInformation[passport_number]" type="text" class="form-control" name="travelInformation[passport_number]"
+                                       value="{{ isset($user->travelInformation->passport_number) ? $user->travelInformation->passport_number : '' }}" >
+                                @if ($errors->has('travelInformation.passport_number'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('travel_information.passport_number') }}</strong>
+                                        <strong>{{ $errors->first('travelInformation.passport_number') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="col-md-6" style="margin: 20px 0;">
-                            <div class="form-group{{ $errors->has('travel_information.expiry') ? ' has-error' : '' }}">
-                                <label for="travel_information[expiry]" class="control-label">Expiry Date/Valid Until</label>
+                            <div class="form-group{{ $errors->has('travelInformation.expiration_date') ? ' has-error' : '' }}">
+                                <label for="travelInformation[expiration_date]" class="control-label">Expiry Date/Valid Until</label>
 
-                                <input id="travel_information[expiry]" type="date" class="form-control" name="travel_information[expiry]"
-                                       value="{{ isset($user->travel_information->expiry) ? $user->travel_information->expiry : '' }}" >
-                                @if ($errors->has('travel_information.expiry'))
+                                <input id="travelInformation[expiration_date]" type="date" class="form-control" name="travelInformation[expiration_date]"
+                                       value="{{ isset($user->travelInformation->expiration_date) ? $user->travelInformation->expiration_date : '' }}" >
+                                @if ($errors->has('travelInformation.expiration_date'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('travel_information.expiry') }}</strong>
+                                        <strong>{{ $errors->first('travelInformation.expiration_date') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="col-md-12" style="margin: 20px 0;">
-                            <div class="form-group{{ $errors->has('travel_information.place_of_issuance') ? ' has-error' : '' }}">
-                                <label for="travel_information[place_of_issuance]" class="control-label">Place of Issuance</label>
+                            <div class="form-group{{ $errors->has('travelInformation.place_of_issuance') ? ' has-error' : '' }}">
+                                <label for="travelInformation[place_of_issuance]" class="control-label">Place of Issuance</label>
 
-                                <input id="travel_information[place_of_issuance]" type="text" class="form-control"
-                                       name="travel_information[place_of_issuance]"
-                                       value="{{ isset($user->travel_information->place_of_issuance) ? $user->travel_information->place_of_issuance : '' }}" >
-                                @if ($errors->has('travel_information.place_of_issuance'))
+                                <input id="travelInformation[place_of_issuance]" type="text" class="form-control"
+                                       name="travelInformation[place_of_issuance]"
+                                       value="{{ isset($user->travelInformation->place_of_issuance) ? $user->travelInformation->place_of_issuance : '' }}" >
+                                @if ($errors->has('travelInformation.place_of_issuance'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('travel_information.place_of_issuance') }}</strong>
+                                        <strong>{{ $errors->first('travelInformation.place_of_issuance') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="col-md-6" style="margin: 20px 0;">
-                            <div class="form-group{{ $errors->has('travel_information.latest_arrival') ? ' has-error' : '' }}">
-                                <label for="travel_information[latest_arrival]" class="control-label">Date of Latest Arrival</label>
+                            <div class="form-group{{ $errors->has('travelInformation.latest_arrival') ? ' has-error' : '' }}">
+                                <label for="travelInformation[latest_arrival]" class="control-label">Date of Latest Arrival</label>
 
-                                <input id="travel_information[latest_arrival]" type="text" class="form-control"
-                                       name="travel_information[latest_arrival]"
-                                       value="{{ isset($user->travel_information->latest_arrival) ? $user->travel_information->latest_arrival : '' }}" >
-                                @if ($errors->has('travel_information.latest_arrival'))
+                                <input id="travelInformation[latest_arrival]" type="text" class="form-control"
+                                       name="travelInformation[latest_arrival]"
+                                       value="{{ isset($user->travelInformation->latest_arrival) ? $user->travelInformation->latest_arrival : '' }}" >
+                                @if ($errors->has('travelInformation.latest_arrival'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('travel_information.latest_arrival') }}</strong>
+                                        <strong>{{ $errors->first('travelInformation.latest_arrival') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="col-md-6" style="margin: 20px 0;">
-                            <div class="form-group{{ $errors->has('travel_information.flight_number') ? ' has-error' : '' }}">
-                                <label for="travel_information[flight_number]" class="control-label">Flight Number</label>
+                            <div class="form-group{{ $errors->has('travelInformation.flight_number') ? ' has-error' : '' }}">
+                                <label for="travelInformation[flight_number]" class="control-label">Flight Number</label>
 
-                                <input id="travel_information[flight_number]" type="text" class="form-control"
-                                       name="travel_information[flight_number]"
-                                       value="{{ isset($user->travel_information->flight_number) ? $user->travel_information->flight_number : '' }}" >
-                                @if ($errors->has('travel_information.flight_number'))
+                                <input id="travelInformation[flight_number]" type="text" class="form-control"
+                                       name="travelInformation[flight_number]"
+                                       value="{{ isset($user->travelInformation->flight_number) ? $user->travelInformation->flight_number : '' }}" >
+                                @if ($errors->has('travelInformation.flight_number'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('travel_information.flight_number') }}</strong>
+                                        <strong>{{ $errors->first('travelInformation.flight_number') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -320,135 +321,135 @@
 
                     </div>
 
-                    <div id="character_references">
+                    <div id="characterReference">
                         <div class="row">
                             <div class="col-md-12">
                                 <p style="font-size: 22px">
                                     <strong>CHARACTER REFERENCES IN THE PHILIPPINES</strong>
-                                    <button class="btn btn-primary pull-right"><i class="fa fa-plus fa-lg"></i> Add another reference</button>
+                                    {{--<button class="btn btn-primary pull-right"><i class="fa fa-plus fa-lg"></i> Add another reference</button>--}}
                                 </p>
                             </div>
 
                             <div class="col-md-6" style="margin: 20px 0;">
-                                <div class="form-group{{ $errors->has('character_references.last_name') ? ' has-error' : '' }}">
-                                    <label for="character_references[last_name]" class="control-label">Last Name</label>
-                                    <input id="character_references[last_name]" type="text" class="form-control"
-                                           name="character_references[last_name]"
-                                           value="{{ isset($user->character_references->last_name) ? $user->character_references->last_name : '' }}" >
-                                    @if ($errors->has('character_references.last_name'))
+                                <div class="form-group{{ $errors->has('characterReference.last_name') ? ' has-error' : '' }}">
+                                    <label for="characterReference[last_name]" class="control-label">Last Name</label>
+                                    <input id="characterReference[last_name]" type="text" class="form-control"
+                                           name="characterReference[last_name]"
+                                           value="{{ isset($user->characterReference->last_name) ? $user->characterReference->last_name : '' }}" >
+                                    @if ($errors->has('characterReference.last_name'))
                                         <span class="help-block">
-                                    <strong>{{ $errors->first('character_references.last_name') }}</strong>
+                                    <strong>{{ $errors->first('characterReference.last_name') }}</strong>
                                 </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="col-md-6" style="margin: 20px 0;">
-                                <div class="form-group{{ $errors->has('character_references.first_name') ? ' has-error' : '' }}">
-                                    <label for="character_references[first_name]" class="control-label">First/Given Name</label>
-                                    <input id="character_references[first_name]" type="text" class="form-control"
-                                           name="character_references[first_name]"
-                                           value="{{ isset($user->character_references->first_name) ? $user->character_references->first_name : '' }}" >
-                                    @if ($errors->has('character_references.first_name'))
+                                <div class="form-group{{ $errors->has('characterReference.first_name') ? ' has-error' : '' }}">
+                                    <label for="characterReference[first_name]" class="control-label">First/Given Name</label>
+                                    <input id="characterReference[first_name]" type="text" class="form-control"
+                                           name="characterReference[first_name]"
+                                           value="{{ isset($user->characterReference->first_name) ? $user->characterReference->first_name : '' }}" >
+                                    @if ($errors->has('characterReference.first_name'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('character_references.first_name') }}</strong>
+                                        <strong>{{ $errors->first('characterReference.first_name') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="col-md-6" style="margin: 20px 0;">
-                                <div class="form-group{{ $errors->has('character_references.middle_name') ? ' has-error' : '' }}">
-                                    <label for="character_references[middle_name]" class="control-label">Middle Name</label>
-                                    <input id="character_references[middle_name]" type="text" class="form-control"
-                                           name="character_references[middle_name]"
-                                           value="{{ isset($user->character_references->middle_name) ? $user->character_references->middle_name : '' }}" >
-                                    @if ($errors->has('character_references.middle_name'))
+                                <div class="form-group{{ $errors->has('characterReference.middle_name') ? ' has-error' : '' }}">
+                                    <label for="characterReference[middle_name]" class="control-label">Middle Name</label>
+                                    <input id="characterReference[middle_name]" type="text" class="form-control"
+                                           name="characterReference[middle_name]"
+                                           value="{{ isset($user->characterReference->middle_name) ? $user->characterReference->middle_name : '' }}" >
+                                    @if ($errors->has('characterReference.middle_name'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('character_references.middle_name') }}</strong>
+                                        <strong>{{ $errors->first('characterReference.middle_name') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="col-md-6" style="margin: 20px 0;">
-                                <div class="form-group{{ $errors->has('character_references.landline_number') ? ' has-error' : '' }}">
-                                    <label for="character_references[landline_number]" class="control-label">Landline</label>
-                                    <input id="character_references[landline_number]" type="text" class="form-control"
-                                           name="character_references[landline_number]"
-                                           value="{{ isset($user->character_references->landline_number) ? $user->character_references->landline_number : '' }}" >
-                                    @if ($errors->has('character_references.landline_number'))
+                                <div class="form-group{{ $errors->has('characterReference.landline_number') ? ' has-error' : '' }}">
+                                    <label for="characterReference[landline_number]" class="control-label">Landline</label>
+                                    <input id="characterReference[landline_number]" type="text" class="form-control"
+                                           name="characterReference[landline_number]"
+                                           value="{{ isset($user->characterReference->landline_number) ? $user->characterReference->landline_number : '' }}" >
+                                    @if ($errors->has('characterReference.landline_number'))
                                         <span class="help-block">
-                                    <strong>{{ $errors->first('character_references.landline_number') }}</strong>
+                                    <strong>{{ $errors->first('characterReference.landline_number') }}</strong>
                                 </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="col-md-6" style="margin: 20px 0;">
-                                <div class="form-group{{ $errors->has('character_references.mobile_number') ? ' has-error' : '' }}">
-                                    <label for="character_references[mobile_number]" class="control-label">Mobile</label>
-                                    <input id="character_references[mobile_number]" type="text" class="form-control"
-                                           name="character_references[mobile_number]"
-                                           value="{{ isset($user->character_references->mobile_number) ? $user->character_references->mobile_number : '' }}" >
-                                    @if ($errors->has('character_references.mobile_number'))
+                                <div class="form-group{{ $errors->has('characterReference.mobile_number') ? ' has-error' : '' }}">
+                                    <label for="characterReference[mobile_number]" class="control-label">Mobile</label>
+                                    <input id="characterReference[mobile_number]" type="text" class="form-control"
+                                           name="characterReference[mobile_number]"
+                                           value="{{ isset($user->characterReference->mobile_number) ? $user->characterReference->mobile_number : '' }}" >
+                                    @if ($errors->has('characterReference.mobile_number'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('character_references.mobile_number') }}</strong>
+                                        <strong>{{ $errors->first('characterReference.mobile_number') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
                             <div class="col-md-12" style="margin: 20px 0;">
-                                <div class="form-group{{ $errors->has('character_references.street') ? ' has-error' : '' }}">
-                                    <label for="character_references[street]" class="control-label">House/Unit No., Street, Subdivision/Village</label>
+                                <div class="form-group{{ $errors->has('characterReference.street') ? ' has-error' : '' }}">
+                                    <label for="characterReference[street]" class="control-label">House/Unit No., Street, Subdivision/Village</label>
 
-                                    <input id="character_references[street]" type="text" class="form-control" name="character_references[street]"
-                                           value="{{ isset($user->character_references->street) ? $user->character_references->street : '' }}" >
-                                    @if ($errors->has('character_references.street'))
+                                    <input id="characterReference[street]" type="text" class="form-control" name="characterReference[street]"
+                                           value="{{ isset($user->characterReference->street) ? $user->characterReference->street : '' }}" >
+                                    @if ($errors->has('characterReference.street'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('character_references.street') }}</strong>
+                                        <strong>{{ $errors->first('characterReference.street') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="col-md-12" style="margin: 20px 0;">
-                                <div class="form-group{{ $errors->has('character_references.city') ? ' has-error' : '' }}">
-                                    <label for="character_references[city]" class="control-label">City, State</label>
+                                <div class="form-group{{ $errors->has('characterReference.city') ? ' has-error' : '' }}">
+                                    <label for="characterReference[city]" class="control-label">City, State</label>
 
-                                    <input id="character_references[city]" type="text" class="form-control" name="character_references[city]"
-                                           value="{{ isset($user->character_references->city) ? $user->character_references->city : '' }}" >
-                                    @if ($errors->has('character_references.city'))
+                                    <input id="characterReference[city]" type="text" class="form-control" name="characterReference[city]"
+                                           value="{{ isset($user->characterReference->city) ? $user->characterReference->city : '' }}" >
+                                    @if ($errors->has('characterReference.city'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('character_references.city') }}</strong>
+                                        <strong>{{ $errors->first('characterReference.city') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="col-md-6" style="margin: 20px 0;">
-                                <div class="form-group{{ $errors->has('character_references.country') ? ' has-error' : '' }}">
-                                    <label for="character_references[country]" class="control-label">Country</label>
+                                <div class="form-group{{ $errors->has('characterReference.country') ? ' has-error' : '' }}">
+                                    <label for="characterReference[country]" class="control-label">Country</label>
 
-                                    <input id="character_references[country]" type="text" class="form-control" name="character_references[country]"
-                                           value="{{ isset($user->character_references->country) ? $user->character_references->country : '' }}" >
-                                    @if ($errors->has('character_references.country'))
+                                    <input id="characterReference[country]" type="text" class="form-control" name="characterReference[country]"
+                                           value="{{ isset($user->characterReference->country) ? $user->characterReference->country : '' }}" >
+                                    @if ($errors->has('characterReference.country'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('character_references.country') }}</strong>
+                                        <strong>{{ $errors->first('characterReference.country') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="col-md-6" style="margin: 20px 0;">
-                                <div class="form-group{{ $errors->has('character_references.zip_code') ? ' has-error' : '' }}">
-                                    <label for="character_references[zip_code]" class="control-label">Zip Code</label>
+                                <div class="form-group{{ $errors->has('characterReference.zip_code') ? ' has-error' : '' }}">
+                                    <label for="characterReference[zip_code]" class="control-label">Zip Code</label>
 
-                                    <input id="character_references[zip_code]" type="text" class="form-control" name="character_references[zip_code]"
-                                           value="{{ isset($user->character_references->zip_code) ? $user->character_references->zip_code : '' }}" >
-                                    @if ($errors->has('character_references.zip_code'))
+                                    <input id="characterReference[zip_code]" type="text" class="form-control" name="characterReference[zip_code]"
+                                           value="{{ isset($user->characterReference->zip_code) ? $user->characterReference->zip_code : '' }}" >
+                                    @if ($errors->has('characterReference.zip_code'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('character_references.zip_code') }}</strong>
+                                        <strong>{{ $errors->first('characterReference.zip_code') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -467,8 +468,8 @@
                             </button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 @endsection

@@ -72,7 +72,7 @@ class RegisterController extends Controller
         ]);
 
         $user->profile()->create($data['profile']);
-        $user->travelInformations()->create($data['travel']);
+        $user->travelInformation()->create($data['travel']);
 
         return $user;
     }

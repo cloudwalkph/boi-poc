@@ -16,7 +16,7 @@ class CreateUserAliasesTable extends Migration
         Schema::create('user_aliases', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('alias');
+            $table->string('alias')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

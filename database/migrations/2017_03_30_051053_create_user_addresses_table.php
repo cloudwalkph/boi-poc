@@ -17,10 +17,10 @@ class CreateUserAddressesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
 //            $table->enum('type', ['ph', 'foreign'])->default('foreign');
-            $table->string('street');
-            $table->string('city');
-            $table->string('country');
-            $table->string('zip_code');
+            $table->string('street')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->string('zip_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

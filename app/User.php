@@ -59,24 +59,24 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class);
     }
 
-    public function addresses()
+    public function address()
     {
-        return $this->hasMany(UserAddress::class);
+        return $this->hasOne(UserAddress::class);
     }
 
-    public function travelInformations()
+    public function travelInformation()
     {
-        return $this->hasMany(TravelInformation::class);
+        return $this->hasOne(TravelInformation::class);
     }
 
-    public function characterReferences()
+    public function characterReference()
     {
-        return $this->hasMany(CharacterReference::class);
+        return $this->hasOne(CharacterReference::class);
     }
 
-    public function aliases()
+    public function alias()
     {
-        return $this->hasMany(UserAlias::class);
+        return $this->hasOne(UserAlias::class);
     }
 
     public function appointments()

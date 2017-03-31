@@ -42,11 +42,23 @@ class RegisterController extends Controller
         $input = $request->all();
 
         $profile = $input['profile'];
+        $alias = $input['alias'];
+        $address = $input['address'];
+        $travelInformation = $input['travelInformation'];
+        $characterReference = $input['characterReference'];
         unset($input['profile']);
+        unset($input['alias']);
+        unset($input['address']);
+        unset($input['travelInformation']);
+        unset($input['characterReference']);
 
         $user = User::find($id)->update($input);
         $user = User::find($id)->first();
         $user->profile()->update($profile);
+        $user->travelInformation()->firstOrCreate($travelInformation);
+        $user->characterReference()->firstOrCreate($characterReference);
+        $user->alias()->firstOrCreate($alias);
+        $user->address()->firstOrCreate($address);
 
         return redirect('/home');
     }
