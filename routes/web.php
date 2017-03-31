@@ -26,3 +26,6 @@ Route::get('/schedule', function () {
 Route::get('/schedule-confirmation', function () {
     return view('schedule_confirmed');
 });
+Route::get('visa-history', function () {
+    return view('history');
+});
