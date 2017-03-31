@@ -47,6 +47,7 @@ class BranchesController extends Controller {
                 'allDay'    => true,
                 'branch'    => $branch->name,
                 'address'   => $branch->address,
+                'time'  => 'am',
                 'title' => 'AM <br/>' . $this->getSlotCount('am', $activeDate, $branch) . ' slot'
             ];
 
@@ -55,6 +56,7 @@ class BranchesController extends Controller {
                 'allDay'    => true,
                 'branch'    => $branch->name,
                 'address'   => $branch->address,
+                'time'  => 'pm',
                 'title' => 'PM <br/>' . $this->getSlotCount('pm', $activeDate, $branch) . ' slot'
             ];
         }

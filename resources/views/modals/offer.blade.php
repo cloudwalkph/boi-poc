@@ -2,6 +2,11 @@
     <div class="modal-dialog">
         <form action="/payments/paypal" method="post">
             {{ csrf_field() }}
+            <input type="hidden" name="branch_id" id="selectedBranchId">
+            <input type="hidden" name="appointment_date" id="selectedAppointmentDate">
+            <input type="hidden" name="appointment_time" id="selectedAppointmentTime">
+            <input type="hidden" name="payment_method" id="selectedPaymentMethod">
+
             <div class="modal-content">
                 <div class="modal-body" style="padding: 0">
                     <img src="/assets/images/offer_id.jpeg" alt="Offer" class="img-responsive">
