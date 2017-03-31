@@ -195,7 +195,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-3 col-md-offset-9">
-                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#offerIdModal">
+                                <button type="button" class="btn btn-primary btn-block btnProceed" data-toggle="modal" data-target="#offerIdModal">
                                     CHECKOUT
                                 </button>
                             </div>
@@ -213,6 +213,17 @@
 @section('scripts')
     <script>
         $(function() {
+            let selectedBranchId = $('#branch_id');
+            let selectedEventObject = null;
+            let paymentMethod = 'paypal';
+
+            $('.btnProceed').on('click', function() {
+                    $('#selectedBranchId').val(selectedBranchId);
+                    $('#selectedAppointmentDate').val(selectedEventObject.start.format('YYYY-MM-DD'));
+                    $('#selectedAppointmentTime').val(selectedEventObject.time);
+                    $('#selectedPaymentMethod').val(paymentMethod);
+            });
+
             $('.calendar').fullCalendar({
                 header: {
                     right: 'prev,next today',
@@ -242,6 +253,9 @@
                 },
                 eventClick: function(event, jsEvent, view) {
                     console.log(event);
+
+                    selectedEvent = event;
+
                     $('#selectedDate').html(event.start.format('LL'));
                     $('#selectedBranch').html(event.branch);
                     $('#selectedBranchAddress').html(event.address);

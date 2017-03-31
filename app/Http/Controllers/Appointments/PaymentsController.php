@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Appointments;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use App\Services\Payment\Dragonpay;
 use App\BOI\Services\Payments\Paypal;
 use Illuminate\Http\Request;
@@ -15,94 +16,25 @@ class PaymentsController extends Controller
     {
         $this->paypal = new Paypal();
         $this->url = env('FRONT_URL') . '/';
+
+        $this->middleware('auth');
     }
-
-//    private function createOrUpdateTransaction($invoice, $userId, $artistId, $paymentMethod, $amount)
-//    {
-//        $invoiceId = $invoice['id'];
-//        if ($invoice['payment_scheme'] != 'down') {
-//            $transaction = Transaction::where('invoice_id', $invoiceId)
-//                ->where('status', '<>', 'cancelled')
-//                ->first();
-//        } else {
-//            $transaction = Transaction::where('invoice_id', $invoiceId)
-//                ->where('status', '<>', 'completed')
-//                ->where('status', '==', 'pending')
-//                ->where('status', '<>', 'cancelled')
-//                ->first();
-//        }
-//        $transId = strtoupper(uniqid('ID')) . 'U' . $userId . 'A' . $artistId;
-//        if (!$transaction) {
-//            $transData = [
-//                'invoice_id' => $invoiceId,
-//                'transaction_no' => $transId,
-//                'payment_gateway' => $paymentMethod,
-//                'amount_paid' => $amount,
-//                'status' => 'pending'
-//            ];
-//            Transaction::create($transData);
-//        } else {
-//            $transData = [
-//                'transaction_no' => $transId,
-//                'payment_gateway' => $paymentMethod,
-//                'amount_paid' => $amount,
-//                'external_transaction_no' => ''
-//            ];
-//            Transaction::where('id', $transaction['id'])->update($transData);
-//        }
-//        return $transId;
-//    }
-
-//    private function getTax($amount)
-//    {
-//        return $amount * 0.12;
-//    }
-
-//    private function createOrUpdateInvoice($bookingId, $amount, $down)
-//    {
-//        $model = Invoice::where('booking_id', $bookingId)
-//            ->where(function ($q) {
-//                $q->where('status', 'initial')
-//                    ->orWhere('status', 'pending');
-//            });
-//        $invoice = $model->first();
-//        if ($invoice) {
-//            $model->update([
-//                'amount' => $amount,
-//                'payment_scheme' => $down ? 'down' : 'full'
-//            ]);
-//            return $invoice;
-//        }
-//        $data = [
-//            'booking_id' => $bookingId,
-//            'amount' => $amount,
-//            'tax' => $this->getTax($amount),
-//            'status' => 'pending',
-//            'payment_scheme' => $down ? 'down' : 'full'
-//        ];
-//        $invoice = Invoice::create($data);
-//        return $invoice;
-//    }
-
-//    private function calculateAmount($invoice, $down = 0)
-//    {
-//        $total = $invoice['amount'] + $invoice['tax'];
-//        if ($down) {
-//            return $total / 2;
-//        }
-//        return $total;
-//    }
 
     public function payment(Request $request, $paymentMethod)
     {
-        $url = null;
-        \DB::transaction(function () use ($request, $paymentMethod, &$url) {
-            $down = 0;
-            if ($request->has('down')) {
-                $down = $request->get('down');
-            }
+        $user = $request->user();
 
-            // Create appointment
+        if (! $user) {
+            return redirect()->back();
+        }
+
+        $url = null;
+        \DB::transaction(function () use ($request, $paymentMethod, $user, &$url) {
+//            $input = $request->all();
+//
+//            // Create appointment
+//            $appointment = Appointment::create();
+
             $transId = uniqid();
             $email = 'alleo.indong@gmail.com';
 
