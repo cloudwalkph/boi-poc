@@ -13,7 +13,7 @@
 
         <div class="button-container">
             <a href="#" class="btn btn-primary">APPLY FOR EXTENSION</a>
-            <a href="#" class="btn btn-primary">VISA HISTORY</a>
+            <a href="/visa-history" class="btn btn-primary">VISA HISTORY</a>
         </div>
 
     </div>
