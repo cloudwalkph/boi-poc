@@ -1,5 +1,5 @@
 <?php
-namespace App\BOI\Services\Payment;
+namespace App\BOI\Services\Payments;
 
 use App\Http\Controllers\Controller;
 use PayPal\Api\Sale;

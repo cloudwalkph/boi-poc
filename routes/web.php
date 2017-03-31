@@ -18,6 +18,7 @@ Route::post('/update', 'RegisterController@update');
 Route::get('/extension','Front\ExtensionController@index');
 Route::get('/schedule','Front\ScheduleController@index');
 Route::get('/schedule-confirmation','Front\ScheduleController@confirm');
+Route::post('/payments/{paymentMethod}', 'Appointments\PaymentsController@payment');
 
 Route::get('/', function () {
     return view('register');
