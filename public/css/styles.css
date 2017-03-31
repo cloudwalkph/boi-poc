@@ -289,6 +289,9 @@ a {
 .paypal{
     background-image:url(../assets/images/paypal.png);
 }
+.dragonpay{
+    background-image:url(../assets/images/dragonpay.png);
+}
 
 .schedule-summary {
     padding: 30px;

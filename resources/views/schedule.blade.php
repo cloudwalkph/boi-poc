@@ -151,11 +151,11 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="input-parent" for="bancnet">
-                                        <input type="radio" name="payment_method" id="bancnet"/>
-                                        <label class="drinkcard-cc bancnet" for="bancnet"></label>
+                                    <label class="input-parent" for="dragonpay">
+                                        <input type="radio" name="payment_method" id="dragonpay"/>
+                                        <label class="drinkcard-cc dragonpay" for="dragonpay"></label>
                                         <h3 style="position: absolute; top: 20%; left: 55%;">
-                                            Bancnet
+                                            DragonPay
                                         </h3>
                                     </label>
                                 </div>
