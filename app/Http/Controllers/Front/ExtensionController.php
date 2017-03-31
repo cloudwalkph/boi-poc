@@ -14,7 +14,8 @@ class ExtensionController extends Controller
      */
     public function index()
     {
-        return view('extension.index');
+        $user = \Auth::user();
+        return view('extension.index', compact('user'));
     }
 
     /**
