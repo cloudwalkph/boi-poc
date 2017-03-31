@@ -15,9 +15,11 @@
                 <div class="col-md-10 col-md-offset-1">
                     <h4>Select an authorized BI office</h4>
 
-                    <select name="immigration_office" id="immigration_office" class="form-control">
-                        <option value="1">Bureau of Immigration Main Office</option>
-                        <option value="2">SM Tarlac Immigration Test</option>
+                    <select name="branch_id" id="branch_id" class="form-control">
+                        <option value="0" selected>Select a branch</option>
+                        @foreach ($branches as $branch)
+                            <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                        @endforeach
                     </select>
 
                     <p class="text-center" style="margin: 20px 0;font-size: 15px;">
@@ -192,16 +194,27 @@
 
 @section('scripts')
     <script>
-        $('.calendar').fullCalendar({
-            header: {
-                right: 'prev,next today',
-                center: 'title',
-                left: ''
-            },
-            navLinks: true, // can click day/week names to navigate views
-            // businessHours: true, // display business hours
-            editable: true,
-            // events: events
+        $(function() {
+            $('.calendar').fullCalendar({
+                header: {
+                    right: 'prev,next today',
+                    center: 'title',
+                    left: ''
+                },
+                navLinks: true, // can click day/week names to navigate views
+                // businessHours: true, // display business hours
+                editable: true,
+                // events: events
+            });
+
+
+            $('#branch_id').on('change', function() {
+                let branchId = $(this).val();
+
+                axios.get(`/api/v1/branches/${branchId}/slots`).then((res) => {
+                    console.log(res);
+                });
+            });
         });
     </script>
 @endsection
