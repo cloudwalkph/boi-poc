@@ -44,3 +44,18 @@ window.axios.defaults.headers.common = {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+/**
+ * Moment js
+ */
+window.moment = require('moment');
+
+/**
+ * FullCalendar
+ */
+window.fullcalender = require('fullcalendar');
+
+/**
+ * datetimepicker
+ */
+window.datetimepicker = require('../lib/datetimepicker/js/bootstrap-datetimepicker.min');

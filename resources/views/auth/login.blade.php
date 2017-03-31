@@ -1,6 +1,6 @@
 
     <div class="row" id="loginForm">
-        <div class="col-md-12" style="z-index: 100; color: #fff; padding: 50px 80px;">
+        <div class="col-md-12" id="loginContent">
             <h1 style="color: #fff;">Bureau of Immigration Online Service</h1>
             <h3 style="color: #fff;">Registration / Renewal</h3>
             <p>

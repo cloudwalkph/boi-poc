@@ -14,6 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/bootstrap-paper.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
@@ -47,7 +48,7 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->profile->getFullNameAttribute() }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
@@ -78,5 +79,8 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+
+<link href="{{ asset('assets/css/fullcalendar/fullcalendar.min.js') }}" rel="stylesheet">
+@yield('scripts')
 </body>
 </html>
