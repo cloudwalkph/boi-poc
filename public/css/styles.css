@@ -149,6 +149,14 @@ a {
     background-position: -250px;
 }
 
+#extensionImg {
+    background: url(../assets/images/Visa_Renew.jpg) no-repeat top fixed;
+    background-size: 100%;
+    width: 100%;
+    height: 34vh;
+    position: relative;
+}
+
 .img-overlay {
     position: absolute;
     top: 0;
@@ -347,6 +355,11 @@ body {
     color: #333;
 }
 
+
+.rowMargin {
+    margin-bottom: 25px;
+}
+
 @media screen and (max-width: 1440px) and (min-width: 1281px) {
 
     #authImg {
@@ -516,3 +529,4 @@ body {
         left: 29%;
     }
 }
+>>>>>>> origin/master

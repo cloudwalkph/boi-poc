@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get('/home', 'RegisterController@index');
 Route::post('/update', 'RegisterController@update');
+Route::get('/extension','Front\ExtensionController@index');
 
 Route::get('/', function () {
     return view('register');
