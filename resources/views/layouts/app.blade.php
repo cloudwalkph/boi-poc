@@ -17,6 +17,8 @@
     <link href="{{ asset('assets/css/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
+    @yield('styles')
+
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
