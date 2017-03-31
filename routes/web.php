@@ -23,11 +23,4 @@ Route::get('/', function () {
     return view('register');
 });
 
-Route::get('/schedule', function () {
-    return view('schedule');
-});
-Route::get('/schedule-confirmation', function () {
-    return view('schedule_confirmed');
-});
-
 Route::get('/visa-history', 'Visa\VisaHistoryController@index');

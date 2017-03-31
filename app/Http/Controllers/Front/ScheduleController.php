@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,9 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        return view('schedule');
+        $branches = Branch::all();
+
+        return view('schedule', compact('branches'));
     }
 
     /**
