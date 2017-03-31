@@ -63,23 +63,13 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-<<<<<<< HEAD
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
-=======
 /******/ 	return __webpack_require__(__webpack_require__.s = 158);
->>>>>>> origin/master
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-"use strict";
-
-
-var bind = __webpack_require__(7);
-=======
 /* WEBPACK VAR INJECTION */(function(module) {//! moment.js
 //! version : 2.18.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -4554,7 +4544,6 @@ return hooks;
 
 
 var bind = __webpack_require__(9);
->>>>>>> origin/master
 
 /*global toString:true*/
 
@@ -4854,563 +4843,7 @@ module.exports = {
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(27);
-
-var PROTECTION_PREFIX = /^\)\]\}',?\n/;
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(3);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(3);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      data = data.replace(PROTECTION_PREFIX, '');
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(0);
-var settle = __webpack_require__(19);
-var buildURL = __webpack_require__(22);
-var parseHeaders = __webpack_require__(28);
-var isURLSameOrigin = __webpack_require__(26);
-var createError = __webpack_require__(6);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(21);
-
-module.exports = function xhrAdapter(config) {
-  return new Promise(function dispatchXhrRequest(resolve, reject) {
-    var requestData = config.data;
-    var requestHeaders = config.headers;
-
-    if (utils.isFormData(requestData)) {
-      delete requestHeaders['Content-Type']; // Let the browser set it
-    }
-
-    var request = new XMLHttpRequest();
-    var loadEvent = 'onreadystatechange';
-    var xDomain = false;
-
-    // For IE 8/9 CORS support
-    // Only supports POST and GET calls and doesn't returns the response headers.
-    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
-    if (process.env.NODE_ENV !== 'test' &&
-        typeof window !== 'undefined' &&
-        window.XDomainRequest && !('withCredentials' in request) &&
-        !isURLSameOrigin(config.url)) {
-      request = new window.XDomainRequest();
-      loadEvent = 'onload';
-      xDomain = true;
-      request.onprogress = function handleProgress() {};
-      request.ontimeout = function handleTimeout() {};
-    }
-
-    // HTTP basic authentication
-    if (config.auth) {
-      var username = config.auth.username || '';
-      var password = config.auth.password || '';
-      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
-    }
-
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
-
-    // Set the request timeout in MS
-    request.timeout = config.timeout;
-
-    // Listen for ready state
-    request[loadEvent] = function handleLoad() {
-      if (!request || (request.readyState !== 4 && !xDomain)) {
-        return;
-      }
-
-      // The request errored out and we didn't get a response, this will be
-      // handled by onerror instead
-      // With one exception: request that using file: protocol, most browsers
-      // will return status as 0 even though it's a successful request
-      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-        return;
-      }
-
-      // Prepare the response
-      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
-      var response = {
-        data: responseData,
-        // IE sends 1223 instead of 204 (https://github.com/mzabriskie/axios/issues/201)
-        status: request.status === 1223 ? 204 : request.status,
-        statusText: request.status === 1223 ? 'No Content' : request.statusText,
-        headers: responseHeaders,
-        config: config,
-        request: request
-      };
-
-      settle(resolve, reject, response);
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle low level network errors
-    request.onerror = function handleError() {
-      // Real errors are hidden from us by the browser
-      // onerror should only fire if it's a network error
-      reject(createError('Network Error', config));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle timeout
-    request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED'));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Add xsrf header
-    // This is only done if running in a standard browser environment.
-    // Specifically not if we're in a web worker, or react-native.
-    if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(24);
-
-      // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
-          cookies.read(config.xsrfCookieName) :
-          undefined;
-
-      if (xsrfValue) {
-        requestHeaders[config.xsrfHeaderName] = xsrfValue;
-      }
-    }
-
-    // Add headers to the request
-    if ('setRequestHeader' in request) {
-      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
-        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
-          // Remove Content-Type if data is undefined
-          delete requestHeaders[key];
-        } else {
-          // Otherwise add header to the request
-          request.setRequestHeader(key, val);
-        }
-      });
-    }
-
-    // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
-    }
-
-    // Add responseType to request if needed
-    if (config.responseType) {
-      try {
-        request.responseType = config.responseType;
-      } catch (e) {
-        if (request.responseType !== 'json') {
-          throw e;
-        }
-      }
-    }
-
-    // Handle progress if needed
-    if (typeof config.onDownloadProgress === 'function') {
-      request.addEventListener('progress', config.onDownloadProgress);
-    }
-
-    // Not all browsers support upload events
-    if (typeof config.onUploadProgress === 'function' && request.upload) {
-      request.upload.addEventListener('progress', config.onUploadProgress);
-    }
-
-    if (config.cancelToken) {
-      // Handle cancellation
-      config.cancelToken.promise.then(function onCanceled(cancel) {
-        if (!request) {
-          return;
-        }
-
-        request.abort();
-        reject(cancel);
-        // Clean up request
-        request = null;
-      });
-    }
-
-    if (requestData === undefined) {
-      requestData = null;
-    }
-
-    // Send the request
-    request.send(requestData);
-  });
-};
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A `Cancel` is an object that is thrown when an operation is canceled.
- *
- * @class
- * @param {string=} message The message.
- */
-function Cancel(message) {
-  this.message = message;
-}
-
-Cancel.prototype.toString = function toString() {
-  return 'Cancel' + (this.message ? ': ' + this.message : '');
-};
-
-Cancel.prototype.__CANCEL__ = true;
-
-module.exports = Cancel;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function isCancel(value) {
-  return !!(value && value.__CANCEL__);
-};
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var enhanceError = __webpack_require__(18);
-
-/**
- * Create an Error with the specified message, config, error code, and response.
- *
- * @param {string} message The error message.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- @ @param {Object} [response] The response.
- * @returns {Error} The created error.
- */
-module.exports = function createError(message, config, code, response) {
-  var error = new Error(message);
-  return enhanceError(error, config, code, response);
-};
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function bind(fn, thisArg) {
-  return function wrap() {
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-    return fn.apply(thisArg, args);
-  };
-};
-
-
-/***/ }),
-/* 8 */
-=======
-/* 2 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15670,9 +15103,6 @@ return jQuery;
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 9 */
-=======
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27306,7 +26736,6 @@ return zhTw;
 
 /***/ }),
 /* 125 */
->>>>>>> origin/master
 /***/ (function(module, exports) {
 
 var g;
@@ -27333,9 +26762,6 @@ module.exports = g;
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 10 */
-=======
 /* 126 */
 /***/ (function(module, exports) {
 
@@ -27365,7 +26791,6 @@ module.exports = function(module) {
 
 /***/ }),
 /* 127 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -27375,11 +26800,7 @@ module.exports = function(module) {
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-<<<<<<< HEAD
-__webpack_require__(31);
-=======
 __webpack_require__(148);
->>>>>>> origin/master
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27387,36 +26808,19 @@ __webpack_require__(148);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-<<<<<<< HEAD
-Vue.component('example', __webpack_require__(34));
-=======
 Vue.component('example', __webpack_require__(154));
->>>>>>> origin/master
 
 var app = new Vue({
   el: '#app'
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 11 */
-=======
 /* 128 */
->>>>>>> origin/master
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-<<<<<<< HEAD
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(13);
-
-/***/ }),
-/* 13 */
-=======
 /* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27424,23 +26828,15 @@ module.exports = __webpack_require__(130);
 
 /***/ }),
 /* 130 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var utils = __webpack_require__(0);
-var bind = __webpack_require__(7);
-var Axios = __webpack_require__(15);
-var defaults = __webpack_require__(1);
-=======
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(9);
 var Axios = __webpack_require__(132);
 var defaults = __webpack_require__(3);
->>>>>>> origin/master
 
 /**
  * Create an instance of Axios
@@ -27473,25 +26869,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-<<<<<<< HEAD
-axios.Cancel = __webpack_require__(4);
-axios.CancelToken = __webpack_require__(14);
-axios.isCancel = __webpack_require__(5);
-=======
 axios.Cancel = __webpack_require__(6);
 axios.CancelToken = __webpack_require__(131);
 axios.isCancel = __webpack_require__(7);
->>>>>>> origin/master
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-<<<<<<< HEAD
-axios.spread = __webpack_require__(29);
-=======
 axios.spread = __webpack_require__(146);
->>>>>>> origin/master
 
 module.exports = axios;
 
@@ -27500,21 +26886,13 @@ module.exports.default = axios;
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 14 */
-=======
 /* 131 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var Cancel = __webpack_require__(4);
-=======
 var Cancel = __webpack_require__(6);
->>>>>>> origin/master
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -27572,31 +26950,18 @@ module.exports = CancelToken;
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 15 */
-=======
 /* 132 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var defaults = __webpack_require__(1);
-var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(16);
-var dispatchRequest = __webpack_require__(17);
-var isAbsoluteURL = __webpack_require__(25);
-var combineURLs = __webpack_require__(23);
-=======
 var defaults = __webpack_require__(3);
 var utils = __webpack_require__(1);
 var InterceptorManager = __webpack_require__(133);
 var dispatchRequest = __webpack_require__(134);
 var isAbsoluteURL = __webpack_require__(142);
 var combineURLs = __webpack_require__(140);
->>>>>>> origin/master
 
 /**
  * Create a new instance of Axios
@@ -27677,21 +27042,13 @@ module.exports = Axios;
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 16 */
-=======
 /* 133 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var utils = __webpack_require__(0);
-=======
 var utils = __webpack_require__(1);
->>>>>>> origin/master
 
 function InterceptorManager() {
   this.handlers = [];
@@ -27744,27 +27101,16 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 17 */
-=======
 /* 134 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var utils = __webpack_require__(0);
-var transformData = __webpack_require__(20);
-var isCancel = __webpack_require__(5);
-var defaults = __webpack_require__(1);
-=======
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(137);
 var isCancel = __webpack_require__(7);
 var defaults = __webpack_require__(3);
->>>>>>> origin/master
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -27841,11 +27187,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 18 */
-=======
 /* 135 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27871,21 +27213,13 @@ module.exports = function enhanceError(error, config, code, response) {
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 19 */
-=======
 /* 136 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var createError = __webpack_require__(6);
-=======
 var createError = __webpack_require__(8);
->>>>>>> origin/master
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -27911,21 +27245,13 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 20 */
-=======
 /* 137 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var utils = __webpack_require__(0);
-=======
 var utils = __webpack_require__(1);
->>>>>>> origin/master
 
 /**
  * Transform the data for a request or a response
@@ -27946,11 +27272,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 21 */
-=======
 /* 138 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27993,21 +27315,13 @@ module.exports = btoa;
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 22 */
-=======
 /* 139 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var utils = __webpack_require__(0);
-=======
 var utils = __webpack_require__(1);
->>>>>>> origin/master
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -28076,11 +27390,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 23 */
-=======
 /* 140 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28099,21 +27409,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 24 */
-=======
 /* 141 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var utils = __webpack_require__(0);
-=======
 var utils = __webpack_require__(1);
->>>>>>> origin/master
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -28167,11 +27469,7 @@ module.exports = (
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 25 */
-=======
 /* 142 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28192,21 +27490,13 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 26 */
-=======
 /* 143 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var utils = __webpack_require__(0);
-=======
 var utils = __webpack_require__(1);
->>>>>>> origin/master
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -28275,21 +27565,13 @@ module.exports = (
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 27 */
-=======
 /* 144 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var utils = __webpack_require__(0);
-=======
 var utils = __webpack_require__(1);
->>>>>>> origin/master
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -28302,21 +27584,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 28 */
-=======
 /* 145 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-<<<<<<< HEAD
-var utils = __webpack_require__(0);
-=======
 var utils = __webpack_require__(1);
->>>>>>> origin/master
 
 /**
  * Parse headers into an object
@@ -28354,11 +27628,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 29 */
-=======
 /* 146 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28392,11 +27662,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 30 */
-=======
 /* 147 */
->>>>>>> origin/master
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28425,19 +27691,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-<<<<<<< HEAD
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-window._ = __webpack_require__(33);
-=======
 /* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 window._ = __webpack_require__(152);
->>>>>>> origin/master
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -28445,15 +27703,9 @@ window._ = __webpack_require__(152);
  * code may be modified to fit the specific needs of your application.
  */
 
-<<<<<<< HEAD
-window.$ = window.jQuery = __webpack_require__(8);
-
-__webpack_require__(32);
-=======
 window.$ = window.jQuery = __webpack_require__(2);
 
 __webpack_require__(150);
->>>>>>> origin/master
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -28461,11 +27713,7 @@ __webpack_require__(150);
  * and simple, leaving you to focus on building your next great project.
  */
 
-<<<<<<< HEAD
-window.Vue = __webpack_require__(37);
-=======
 window.Vue = __webpack_require__(157);
->>>>>>> origin/master
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -28473,11 +27721,7 @@ window.Vue = __webpack_require__(157);
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-<<<<<<< HEAD
-window.axios = __webpack_require__(12);
-=======
 window.axios = __webpack_require__(129);
->>>>>>> origin/master
 
 window.axios.defaults.headers.common = {
   'X-CSRF-TOKEN': window.Laravel.csrfToken,
@@ -28500,30 +27744,16 @@ window.axios.defaults.headers.common = {
 /**
  * Moment js
  */
-<<<<<<< HEAD
-window.moment = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"moment\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-=======
 window.moment = __webpack_require__(0);
->>>>>>> origin/master
 
 /**
  * FullCalendar
  */
-<<<<<<< HEAD
-window.fullcalender = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"fullcalendar\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-=======
 window.fullcalender = __webpack_require__(151);
->>>>>>> origin/master
 
 /**
  * datetimepicker
  */
-<<<<<<< HEAD
-window.datetimepicker = __webpack_require__(48);
-
-/***/ }),
-/* 32 */
-=======
 window.datetimepicker = __webpack_require__(149);
 
 /***/ }),
@@ -29046,7 +28276,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 /* 150 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/*!
@@ -31427,12 +30656,6 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-<<<<<<< HEAD
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
-
-/***/ }),
-/* 33 */
-=======
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
@@ -46698,7 +45921,6 @@ return FC; // export for Node/CommonJS
 
 /***/ }),
 /* 152 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -63787,19 +63009,6 @@ return FC; // export for Node/CommonJS
   }
 }.call(this));
 
-<<<<<<< HEAD
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(38)(module)))
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(35)(
-  /* script */
-  __webpack_require__(30),
-  /* template */
-  __webpack_require__(36),
-=======
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(125), __webpack_require__(126)(module)))
 
 /***/ }),
@@ -64063,17 +63272,12 @@ var Component = __webpack_require__(155)(
   __webpack_require__(147),
   /* template */
   __webpack_require__(156),
->>>>>>> origin/master
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-<<<<<<< HEAD
-Component.options.__file = "D:\\PROJECT\\react_redux\\boi-poc\\resources\\assets\\js\\components\\Example.vue"
-=======
-Component.options.__file = "/Users/nkmcheng/Public/projects/cloudwalk/boi-poc/resources/assets/js/components/Example.vue"
->>>>>>> origin/master
+Component.options.__file = "/Users/alleoindong/Public/projects/medix/boi-poc/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -64094,11 +63298,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 35 */
-=======
 /* 155 */
->>>>>>> origin/master
 /***/ (function(module, exports) {
 
 module.exports = function normalizeComponent (
@@ -64151,11 +63351,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-<<<<<<< HEAD
-/* 36 */
-=======
 /* 156 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -64184,11 +63380,7 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< HEAD
-/* 37 */
-=======
 /* 157 */
->>>>>>> origin/master
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73513,571 +72705,6 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-<<<<<<< HEAD
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(9)))
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(10);
-module.exports = __webpack_require__(11);
-
-
-/***/ }),
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-!function (a) {
-  "use strict";
-  if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(8), !(function webpackMissingModule() { var e = new Error("Cannot find module \"moment\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())], __WEBPACK_AMD_DEFINE_FACTORY__ = (a),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if ("object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports))) module.exports = a(require("jquery"), require("moment"));else {
-    if ("undefined" == typeof jQuery) throw "bootstrap-datetimepicker requires jQuery to be loaded first";if ("undefined" == typeof moment) throw "bootstrap-datetimepicker requires Moment.js to be loaded first";a(jQuery, moment);
-  }
-}(function (a, b) {
-  "use strict";
-  if (!b) throw new Error("bootstrap-datetimepicker requires Moment.js to be loaded first");var c = function c(_c, d) {
-    var e,
-        f,
-        g,
-        h,
-        i,
-        j,
-        k,
-        l = {},
-        m = !0,
-        n = !1,
-        o = !1,
-        p = 0,
-        q = [{ clsName: "days", navFnc: "M", navStep: 1 }, { clsName: "months", navFnc: "y", navStep: 1 }, { clsName: "years", navFnc: "y", navStep: 10 }, { clsName: "decades", navFnc: "y", navStep: 100 }],
-        r = ["days", "months", "years", "decades"],
-        s = ["top", "bottom", "auto"],
-        t = ["left", "right", "auto"],
-        u = ["default", "top", "bottom"],
-        v = { up: 38, 38: "up", down: 40, 40: "down", left: 37, 37: "left", right: 39, 39: "right", tab: 9, 9: "tab", escape: 27, 27: "escape", enter: 13, 13: "enter", pageUp: 33, 33: "pageUp", pageDown: 34, 34: "pageDown", shift: 16, 16: "shift", control: 17, 17: "control", space: 32, 32: "space", t: 84, 84: "t", delete: 46, 46: "delete" },
-        w = {},
-        x = function x() {
-      return void 0 !== b.tz && void 0 !== d.timeZone && null !== d.timeZone && "" !== d.timeZone;
-    },
-        y = function y(a) {
-      var c;return c = void 0 === a || null === a ? b() : b.isDate(a) || b.isMoment(a) ? b(a) : x() ? b.tz(a, j, d.useStrict, d.timeZone) : b(a, j, d.useStrict), x() && c.tz(d.timeZone), c;
-    },
-        z = function z(a) {
-      if ("string" != typeof a || a.length > 1) throw new TypeError("isEnabled expects a single character string parameter");switch (a) {case "y":
-          return i.indexOf("Y") !== -1;case "M":
-          return i.indexOf("M") !== -1;case "d":
-          return i.toLowerCase().indexOf("d") !== -1;case "h":case "H":
-          return i.toLowerCase().indexOf("h") !== -1;case "m":
-          return i.indexOf("m") !== -1;case "s":
-          return i.indexOf("s") !== -1;default:
-          return !1;}
-    },
-        A = function A() {
-      return z("h") || z("m") || z("s");
-    },
-        B = function B() {
-      return z("y") || z("M") || z("d");
-    },
-        C = function C() {
-      var b = a("<thead>").append(a("<tr>").append(a("<th>").addClass("prev").attr("data-action", "previous").append(a("<span>").addClass(d.icons.previous))).append(a("<th>").addClass("picker-switch").attr("data-action", "pickerSwitch").attr("colspan", d.calendarWeeks ? "6" : "5")).append(a("<th>").addClass("next").attr("data-action", "next").append(a("<span>").addClass(d.icons.next)))),
-          c = a("<tbody>").append(a("<tr>").append(a("<td>").attr("colspan", d.calendarWeeks ? "8" : "7")));return [a("<div>").addClass("datepicker-days").append(a("<table>").addClass("table-condensed").append(b).append(a("<tbody>"))), a("<div>").addClass("datepicker-months").append(a("<table>").addClass("table-condensed").append(b.clone()).append(c.clone())), a("<div>").addClass("datepicker-years").append(a("<table>").addClass("table-condensed").append(b.clone()).append(c.clone())), a("<div>").addClass("datepicker-decades").append(a("<table>").addClass("table-condensed").append(b.clone()).append(c.clone()))];
-    },
-        D = function D() {
-      var b = a("<tr>"),
-          c = a("<tr>"),
-          e = a("<tr>");return z("h") && (b.append(a("<td>").append(a("<a>").attr({ href: "#", tabindex: "-1", title: d.tooltips.incrementHour }).addClass("btn").attr("data-action", "incrementHours").append(a("<span>").addClass(d.icons.up)))), c.append(a("<td>").append(a("<span>").addClass("timepicker-hour").attr({ "data-time-component": "hours", title: d.tooltips.pickHour }).attr("data-action", "showHours"))), e.append(a("<td>").append(a("<a>").attr({ href: "#", tabindex: "-1", title: d.tooltips.decrementHour }).addClass("btn").attr("data-action", "decrementHours").append(a("<span>").addClass(d.icons.down))))), z("m") && (z("h") && (b.append(a("<td>").addClass("separator")), c.append(a("<td>").addClass("separator").html(":")), e.append(a("<td>").addClass("separator"))), b.append(a("<td>").append(a("<a>").attr({ href: "#", tabindex: "-1", title: d.tooltips.incrementMinute }).addClass("btn").attr("data-action", "incrementMinutes").append(a("<span>").addClass(d.icons.up)))), c.append(a("<td>").append(a("<span>").addClass("timepicker-minute").attr({ "data-time-component": "minutes", title: d.tooltips.pickMinute }).attr("data-action", "showMinutes"))), e.append(a("<td>").append(a("<a>").attr({ href: "#", tabindex: "-1", title: d.tooltips.decrementMinute }).addClass("btn").attr("data-action", "decrementMinutes").append(a("<span>").addClass(d.icons.down))))), z("s") && (z("m") && (b.append(a("<td>").addClass("separator")), c.append(a("<td>").addClass("separator").html(":")), e.append(a("<td>").addClass("separator"))), b.append(a("<td>").append(a("<a>").attr({ href: "#", tabindex: "-1", title: d.tooltips.incrementSecond }).addClass("btn").attr("data-action", "incrementSeconds").append(a("<span>").addClass(d.icons.up)))), c.append(a("<td>").append(a("<span>").addClass("timepicker-second").attr({ "data-time-component": "seconds", title: d.tooltips.pickSecond }).attr("data-action", "showSeconds"))), e.append(a("<td>").append(a("<a>").attr({ href: "#", tabindex: "-1", title: d.tooltips.decrementSecond }).addClass("btn").attr("data-action", "decrementSeconds").append(a("<span>").addClass(d.icons.down))))), h || (b.append(a("<td>").addClass("separator")), c.append(a("<td>").append(a("<button>").addClass("btn btn-primary").attr({ "data-action": "togglePeriod", tabindex: "-1", title: d.tooltips.togglePeriod }))), e.append(a("<td>").addClass("separator"))), a("<div>").addClass("timepicker-picker").append(a("<table>").addClass("table-condensed").append([b, c, e]));
-    },
-        E = function E() {
-      var b = a("<div>").addClass("timepicker-hours").append(a("<table>").addClass("table-condensed")),
-          c = a("<div>").addClass("timepicker-minutes").append(a("<table>").addClass("table-condensed")),
-          d = a("<div>").addClass("timepicker-seconds").append(a("<table>").addClass("table-condensed")),
-          e = [D()];return z("h") && e.push(b), z("m") && e.push(c), z("s") && e.push(d), e;
-    },
-        F = function F() {
-      var b = [];return d.showTodayButton && b.push(a("<td>").append(a("<a>").attr({ "data-action": "today", title: d.tooltips.today }).append(a("<span>").addClass(d.icons.today)))), !d.sideBySide && B() && A() && b.push(a("<td>").append(a("<a>").attr({ "data-action": "togglePicker", title: d.tooltips.selectTime }).append(a("<span>").addClass(d.icons.time)))), d.showClear && b.push(a("<td>").append(a("<a>").attr({ "data-action": "clear", title: d.tooltips.clear }).append(a("<span>").addClass(d.icons.clear)))), d.showClose && b.push(a("<td>").append(a("<a>").attr({ "data-action": "close", title: d.tooltips.close }).append(a("<span>").addClass(d.icons.close)))), a("<table>").addClass("table-condensed").append(a("<tbody>").append(a("<tr>").append(b)));
-    },
-        G = function G() {
-      var b = a("<div>").addClass("bootstrap-datetimepicker-widget dropdown-menu"),
-          c = a("<div>").addClass("datepicker").append(C()),
-          e = a("<div>").addClass("timepicker").append(E()),
-          f = a("<ul>").addClass("list-unstyled"),
-          g = a("<li>").addClass("picker-switch" + (d.collapse ? " accordion-toggle" : "")).append(F());return d.inline && b.removeClass("dropdown-menu"), h && b.addClass("usetwentyfour"), z("s") && !h && b.addClass("wider"), d.sideBySide && B() && A() ? (b.addClass("timepicker-sbs"), "top" === d.toolbarPlacement && b.append(g), b.append(a("<div>").addClass("row").append(c.addClass("col-md-6")).append(e.addClass("col-md-6"))), "bottom" === d.toolbarPlacement && b.append(g), b) : ("top" === d.toolbarPlacement && f.append(g), B() && f.append(a("<li>").addClass(d.collapse && A() ? "collapse in" : "").append(c)), "default" === d.toolbarPlacement && f.append(g), A() && f.append(a("<li>").addClass(d.collapse && B() ? "collapse" : "").append(e)), "bottom" === d.toolbarPlacement && f.append(g), b.append(f));
-    },
-        H = function H() {
-      var b,
-          e = {};return b = _c.is("input") || d.inline ? _c.data() : _c.find("input").data(), b.dateOptions && b.dateOptions instanceof Object && (e = a.extend(!0, e, b.dateOptions)), a.each(d, function (a) {
-        var c = "date" + a.charAt(0).toUpperCase() + a.slice(1);void 0 !== b[c] && (e[a] = b[c]);
-      }), e;
-    },
-        I = function I() {
-      var b,
-          e = (n || _c).position(),
-          f = (n || _c).offset(),
-          g = d.widgetPositioning.vertical,
-          h = d.widgetPositioning.horizontal;if (d.widgetParent) b = d.widgetParent.append(o);else if (_c.is("input")) b = _c.after(o).parent();else {
-        if (d.inline) return void (b = _c.append(o));b = _c, _c.children().first().after(o);
-      }if ("auto" === g && (g = f.top + 1.5 * o.height() >= a(window).height() + a(window).scrollTop() && o.height() + _c.outerHeight() < f.top ? "top" : "bottom"), "auto" === h && (h = b.width() < f.left + o.outerWidth() / 2 && f.left + o.outerWidth() > a(window).width() ? "right" : "left"), "top" === g ? o.addClass("top").removeClass("bottom") : o.addClass("bottom").removeClass("top"), "right" === h ? o.addClass("pull-right") : o.removeClass("pull-right"), "static" === b.css("position") && (b = b.parents().filter(function () {
-        return "static" !== a(this).css("position");
-      }).first()), 0 === b.length) throw new Error("datetimepicker component should be placed within a non-static positioned container");o.css({ top: "top" === g ? "auto" : e.top + _c.outerHeight(), bottom: "top" === g ? b.outerHeight() - (b === _c ? 0 : e.top) : "auto", left: "left" === h ? b === _c ? 0 : e.left : "auto", right: "left" === h ? "auto" : b.outerWidth() - _c.outerWidth() - (b === _c ? 0 : e.left) });
-    },
-        J = function J(a) {
-      "dp.change" === a.type && (a.date && a.date.isSame(a.oldDate) || !a.date && !a.oldDate) || _c.trigger(a);
-    },
-        K = function K(a) {
-      "y" === a && (a = "YYYY"), J({ type: "dp.update", change: a, viewDate: f.clone() });
-    },
-        L = function L(a) {
-      o && (a && (k = Math.max(p, Math.min(3, k + a))), o.find(".datepicker > div").hide().filter(".datepicker-" + q[k].clsName).show());
-    },
-        M = function M() {
-      var b = a("<tr>"),
-          c = f.clone().startOf("w").startOf("d");for (d.calendarWeeks === !0 && b.append(a("<th>").addClass("cw").text("#")); c.isBefore(f.clone().endOf("w"));) {
-        b.append(a("<th>").addClass("dow").text(c.format("dd"))), c.add(1, "d");
-      }o.find(".datepicker-days thead").append(b);
-    },
-        N = function N(a) {
-      return d.disabledDates[a.format("YYYY-MM-DD")] === !0;
-    },
-        O = function O(a) {
-      return d.enabledDates[a.format("YYYY-MM-DD")] === !0;
-    },
-        P = function P(a) {
-      return d.disabledHours[a.format("H")] === !0;
-    },
-        Q = function Q(a) {
-      return d.enabledHours[a.format("H")] === !0;
-    },
-        R = function R(b, c) {
-      if (!b.isValid()) return !1;if (d.disabledDates && "d" === c && N(b)) return !1;if (d.enabledDates && "d" === c && !O(b)) return !1;if (d.minDate && b.isBefore(d.minDate, c)) return !1;if (d.maxDate && b.isAfter(d.maxDate, c)) return !1;if (d.daysOfWeekDisabled && "d" === c && d.daysOfWeekDisabled.indexOf(b.day()) !== -1) return !1;if (d.disabledHours && ("h" === c || "m" === c || "s" === c) && P(b)) return !1;if (d.enabledHours && ("h" === c || "m" === c || "s" === c) && !Q(b)) return !1;if (d.disabledTimeIntervals && ("h" === c || "m" === c || "s" === c)) {
-        var e = !1;if (a.each(d.disabledTimeIntervals, function () {
-          if (b.isBetween(this[0], this[1])) return e = !0, !1;
-        }), e) return !1;
-      }return !0;
-    },
-        S = function S() {
-      for (var b = [], c = f.clone().startOf("y").startOf("d"); c.isSame(f, "y");) {
-        b.push(a("<span>").attr("data-action", "selectMonth").addClass("month").text(c.format("MMM"))), c.add(1, "M");
-      }o.find(".datepicker-months td").empty().append(b);
-    },
-        T = function T() {
-      var b = o.find(".datepicker-months"),
-          c = b.find("th"),
-          g = b.find("tbody").find("span");c.eq(0).find("span").attr("title", d.tooltips.prevYear), c.eq(1).attr("title", d.tooltips.selectYear), c.eq(2).find("span").attr("title", d.tooltips.nextYear), b.find(".disabled").removeClass("disabled"), R(f.clone().subtract(1, "y"), "y") || c.eq(0).addClass("disabled"), c.eq(1).text(f.year()), R(f.clone().add(1, "y"), "y") || c.eq(2).addClass("disabled"), g.removeClass("active"), e.isSame(f, "y") && !m && g.eq(e.month()).addClass("active"), g.each(function (b) {
-        R(f.clone().month(b), "M") || a(this).addClass("disabled");
-      });
-    },
-        U = function U() {
-      var a = o.find(".datepicker-years"),
-          b = a.find("th"),
-          c = f.clone().subtract(5, "y"),
-          g = f.clone().add(6, "y"),
-          h = "";for (b.eq(0).find("span").attr("title", d.tooltips.prevDecade), b.eq(1).attr("title", d.tooltips.selectDecade), b.eq(2).find("span").attr("title", d.tooltips.nextDecade), a.find(".disabled").removeClass("disabled"), d.minDate && d.minDate.isAfter(c, "y") && b.eq(0).addClass("disabled"), b.eq(1).text(c.year() + "-" + g.year()), d.maxDate && d.maxDate.isBefore(g, "y") && b.eq(2).addClass("disabled"); !c.isAfter(g, "y");) {
-        h += '<span data-action="selectYear" class="year' + (c.isSame(e, "y") && !m ? " active" : "") + (R(c, "y") ? "" : " disabled") + '">' + c.year() + "</span>", c.add(1, "y");
-      }a.find("td").html(h);
-    },
-        V = function V() {
-      var a,
-          c = o.find(".datepicker-decades"),
-          g = c.find("th"),
-          h = b({ y: f.year() - f.year() % 100 - 1 }),
-          i = h.clone().add(100, "y"),
-          j = h.clone(),
-          k = !1,
-          l = !1,
-          m = "";for (g.eq(0).find("span").attr("title", d.tooltips.prevCentury), g.eq(2).find("span").attr("title", d.tooltips.nextCentury), c.find(".disabled").removeClass("disabled"), (h.isSame(b({ y: 1900 })) || d.minDate && d.minDate.isAfter(h, "y")) && g.eq(0).addClass("disabled"), g.eq(1).text(h.year() + "-" + i.year()), (h.isSame(b({ y: 2e3 })) || d.maxDate && d.maxDate.isBefore(i, "y")) && g.eq(2).addClass("disabled"); !h.isAfter(i, "y");) {
-        a = h.year() + 12, k = d.minDate && d.minDate.isAfter(h, "y") && d.minDate.year() <= a, l = d.maxDate && d.maxDate.isAfter(h, "y") && d.maxDate.year() <= a, m += '<span data-action="selectDecade" class="decade' + (e.isAfter(h) && e.year() <= a ? " active" : "") + (R(h, "y") || k || l ? "" : " disabled") + '" data-selection="' + (h.year() + 6) + '">' + (h.year() + 1) + " - " + (h.year() + 12) + "</span>", h.add(12, "y");
-      }m += "<span></span><span></span><span></span>", c.find("td").html(m), g.eq(1).text(j.year() + 1 + "-" + h.year());
-    },
-        W = function W() {
-      var b,
-          c,
-          g,
-          h = o.find(".datepicker-days"),
-          i = h.find("th"),
-          j = [],
-          k = [];if (B()) {
-        for (i.eq(0).find("span").attr("title", d.tooltips.prevMonth), i.eq(1).attr("title", d.tooltips.selectMonth), i.eq(2).find("span").attr("title", d.tooltips.nextMonth), h.find(".disabled").removeClass("disabled"), i.eq(1).text(f.format(d.dayViewHeaderFormat)), R(f.clone().subtract(1, "M"), "M") || i.eq(0).addClass("disabled"), R(f.clone().add(1, "M"), "M") || i.eq(2).addClass("disabled"), b = f.clone().startOf("M").startOf("w").startOf("d"), g = 0; g < 42; g++) {
-          0 === b.weekday() && (c = a("<tr>"), d.calendarWeeks && c.append('<td class="cw">' + b.week() + "</td>"), j.push(c)), k = ["day"], b.isBefore(f, "M") && k.push("old"), b.isAfter(f, "M") && k.push("new"), b.isSame(e, "d") && !m && k.push("active"), R(b, "d") || k.push("disabled"), b.isSame(y(), "d") && k.push("today"), 0 !== b.day() && 6 !== b.day() || k.push("weekend"), J({ type: "dp.classify", date: b, classNames: k }), c.append('<td data-action="selectDay" data-day="' + b.format("L") + '" class="' + k.join(" ") + '">' + b.date() + "</td>"), b.add(1, "d");
-        }h.find("tbody").empty().append(j), T(), U(), V();
-      }
-    },
-        X = function X() {
-      var b = o.find(".timepicker-hours table"),
-          c = f.clone().startOf("d"),
-          d = [],
-          e = a("<tr>");for (f.hour() > 11 && !h && c.hour(12); c.isSame(f, "d") && (h || f.hour() < 12 && c.hour() < 12 || f.hour() > 11);) {
-        c.hour() % 4 === 0 && (e = a("<tr>"), d.push(e)), e.append('<td data-action="selectHour" class="hour' + (R(c, "h") ? "" : " disabled") + '">' + c.format(h ? "HH" : "hh") + "</td>"), c.add(1, "h");
-      }b.empty().append(d);
-    },
-        Y = function Y() {
-      for (var b = o.find(".timepicker-minutes table"), c = f.clone().startOf("h"), e = [], g = a("<tr>"), h = 1 === d.stepping ? 5 : d.stepping; f.isSame(c, "h");) {
-        c.minute() % (4 * h) === 0 && (g = a("<tr>"), e.push(g)), g.append('<td data-action="selectMinute" class="minute' + (R(c, "m") ? "" : " disabled") + '">' + c.format("mm") + "</td>"), c.add(h, "m");
-      }b.empty().append(e);
-    },
-        Z = function Z() {
-      for (var b = o.find(".timepicker-seconds table"), c = f.clone().startOf("m"), d = [], e = a("<tr>"); f.isSame(c, "m");) {
-        c.second() % 20 === 0 && (e = a("<tr>"), d.push(e)), e.append('<td data-action="selectSecond" class="second' + (R(c, "s") ? "" : " disabled") + '">' + c.format("ss") + "</td>"), c.add(5, "s");
-      }b.empty().append(d);
-    },
-        $ = function $() {
-      var a,
-          b,
-          c = o.find(".timepicker span[data-time-component]");h || (a = o.find(".timepicker [data-action=togglePeriod]"), b = e.clone().add(e.hours() >= 12 ? -12 : 12, "h"), a.text(e.format("A")), R(b, "h") ? a.removeClass("disabled") : a.addClass("disabled")), c.filter("[data-time-component=hours]").text(e.format(h ? "HH" : "hh")), c.filter("[data-time-component=minutes]").text(e.format("mm")), c.filter("[data-time-component=seconds]").text(e.format("ss")), X(), Y(), Z();
-    },
-        _ = function _() {
-      o && (W(), $());
-    },
-        aa = function aa(a) {
-      var b = m ? null : e;if (!a) return m = !0, g.val(""), _c.data("date", ""), J({ type: "dp.change", date: !1, oldDate: b }), void _();if (a = a.clone().locale(d.locale), x() && a.tz(d.timeZone), 1 !== d.stepping) for (a.minutes(Math.round(a.minutes() / d.stepping) * d.stepping).seconds(0); d.minDate && a.isBefore(d.minDate);) {
-        a.add(d.stepping, "minutes");
-      }R(a) ? (e = a, f = e.clone(), g.val(e.format(i)), _c.data("date", e.format(i)), m = !1, _(), J({ type: "dp.change", date: e.clone(), oldDate: b })) : (d.keepInvalid ? J({ type: "dp.change", date: a, oldDate: b }) : g.val(m ? "" : e.format(i)), J({ type: "dp.error", date: a, oldDate: b }));
-    },
-        ba = function ba() {
-      var b = !1;return o ? (o.find(".collapse").each(function () {
-        var c = a(this).data("collapse");return !c || !c.transitioning || (b = !0, !1);
-      }), b ? l : (n && n.hasClass("btn") && n.toggleClass("active"), o.hide(), a(window).off("resize", I), o.off("click", "[data-action]"), o.off("mousedown", !1), o.remove(), o = !1, J({ type: "dp.hide", date: e.clone() }), g.blur(), k = 0, f = e.clone(), l)) : l;
-    },
-        ca = function ca() {
-      aa(null);
-    },
-        da = function da(a) {
-      return void 0 === d.parseInputDate ? (!b.isMoment(a) || a instanceof Date) && (a = y(a)) : a = d.parseInputDate(a), a;
-    },
-        ea = { next: function next() {
-        var a = q[k].navFnc;f.add(q[k].navStep, a), W(), K(a);
-      }, previous: function previous() {
-        var a = q[k].navFnc;f.subtract(q[k].navStep, a), W(), K(a);
-      }, pickerSwitch: function pickerSwitch() {
-        L(1);
-      }, selectMonth: function selectMonth(b) {
-        var c = a(b.target).closest("tbody").find("span").index(a(b.target));f.month(c), k === p ? (aa(e.clone().year(f.year()).month(f.month())), d.inline || ba()) : (L(-1), W()), K("M");
-      }, selectYear: function selectYear(b) {
-        var c = parseInt(a(b.target).text(), 10) || 0;f.year(c), k === p ? (aa(e.clone().year(f.year())), d.inline || ba()) : (L(-1), W()), K("YYYY");
-      }, selectDecade: function selectDecade(b) {
-        var c = parseInt(a(b.target).data("selection"), 10) || 0;f.year(c), k === p ? (aa(e.clone().year(f.year())), d.inline || ba()) : (L(-1), W()), K("YYYY");
-      }, selectDay: function selectDay(b) {
-        var c = f.clone();a(b.target).is(".old") && c.subtract(1, "M"), a(b.target).is(".new") && c.add(1, "M"), aa(c.date(parseInt(a(b.target).text(), 10))), A() || d.keepOpen || d.inline || ba();
-      }, incrementHours: function incrementHours() {
-        var a = e.clone().add(1, "h");R(a, "h") && aa(a);
-      }, incrementMinutes: function incrementMinutes() {
-        var a = e.clone().add(d.stepping, "m");R(a, "m") && aa(a);
-      }, incrementSeconds: function incrementSeconds() {
-        var a = e.clone().add(1, "s");R(a, "s") && aa(a);
-      }, decrementHours: function decrementHours() {
-        var a = e.clone().subtract(1, "h");R(a, "h") && aa(a);
-      }, decrementMinutes: function decrementMinutes() {
-        var a = e.clone().subtract(d.stepping, "m");R(a, "m") && aa(a);
-      }, decrementSeconds: function decrementSeconds() {
-        var a = e.clone().subtract(1, "s");R(a, "s") && aa(a);
-      }, togglePeriod: function togglePeriod() {
-        aa(e.clone().add(e.hours() >= 12 ? -12 : 12, "h"));
-      }, togglePicker: function togglePicker(b) {
-        var c,
-            e = a(b.target),
-            f = e.closest("ul"),
-            g = f.find(".in"),
-            h = f.find(".collapse:not(.in)");if (g && g.length) {
-          if (c = g.data("collapse"), c && c.transitioning) return;g.collapse ? (g.collapse("hide"), h.collapse("show")) : (g.removeClass("in"), h.addClass("in")), e.is("span") ? e.toggleClass(d.icons.time + " " + d.icons.date) : e.find("span").toggleClass(d.icons.time + " " + d.icons.date);
-        }
-      }, showPicker: function showPicker() {
-        o.find(".timepicker > div:not(.timepicker-picker)").hide(), o.find(".timepicker .timepicker-picker").show();
-      }, showHours: function showHours() {
-        o.find(".timepicker .timepicker-picker").hide(), o.find(".timepicker .timepicker-hours").show();
-      }, showMinutes: function showMinutes() {
-        o.find(".timepicker .timepicker-picker").hide(), o.find(".timepicker .timepicker-minutes").show();
-      }, showSeconds: function showSeconds() {
-        o.find(".timepicker .timepicker-picker").hide(), o.find(".timepicker .timepicker-seconds").show();
-      }, selectHour: function selectHour(b) {
-        var c = parseInt(a(b.target).text(), 10);h || (e.hours() >= 12 ? 12 !== c && (c += 12) : 12 === c && (c = 0)), aa(e.clone().hours(c)), ea.showPicker.call(l);
-      }, selectMinute: function selectMinute(b) {
-        aa(e.clone().minutes(parseInt(a(b.target).text(), 10))), ea.showPicker.call(l);
-      }, selectSecond: function selectSecond(b) {
-        aa(e.clone().seconds(parseInt(a(b.target).text(), 10))), ea.showPicker.call(l);
-      }, clear: ca, today: function today() {
-        var a = y();R(a, "d") && aa(a);
-      }, close: ba },
-        fa = function fa(b) {
-      return !a(b.currentTarget).is(".disabled") && (ea[a(b.currentTarget).data("action")].apply(l, arguments), !1);
-    },
-        ga = function ga() {
-      var b,
-          c = { year: function year(a) {
-          return a.month(0).date(1).hours(0).seconds(0).minutes(0);
-        }, month: function month(a) {
-          return a.date(1).hours(0).seconds(0).minutes(0);
-        }, day: function day(a) {
-          return a.hours(0).seconds(0).minutes(0);
-        }, hour: function hour(a) {
-          return a.seconds(0).minutes(0);
-        }, minute: function minute(a) {
-          return a.seconds(0);
-        } };return g.prop("disabled") || !d.ignoreReadonly && g.prop("readonly") || o ? l : (void 0 !== g.val() && 0 !== g.val().trim().length ? aa(da(g.val().trim())) : m && d.useCurrent && (d.inline || g.is("input") && 0 === g.val().trim().length) && (b = y(), "string" == typeof d.useCurrent && (b = c[d.useCurrent](b)), aa(b)), o = G(), M(), S(), o.find(".timepicker-hours").hide(), o.find(".timepicker-minutes").hide(), o.find(".timepicker-seconds").hide(), _(), L(), a(window).on("resize", I), o.on("click", "[data-action]", fa), o.on("mousedown", !1), n && n.hasClass("btn") && n.toggleClass("active"), I(), o.show(), d.focusOnShow && !g.is(":focus") && g.focus(), J({ type: "dp.show" }), l);
-    },
-        ha = function ha() {
-      return o ? ba() : ga();
-    },
-        ia = function ia(a) {
-      var b,
-          c,
-          e,
-          f,
-          g = null,
-          h = [],
-          i = {},
-          j = a.which,
-          k = "p";w[j] = k;for (b in w) {
-        w.hasOwnProperty(b) && w[b] === k && (h.push(b), parseInt(b, 10) !== j && (i[b] = !0));
-      }for (b in d.keyBinds) {
-        if (d.keyBinds.hasOwnProperty(b) && "function" == typeof d.keyBinds[b] && (e = b.split(" "), e.length === h.length && v[j] === e[e.length - 1])) {
-          for (f = !0, c = e.length - 2; c >= 0; c--) {
-            if (!(v[e[c]] in i)) {
-              f = !1;break;
-            }
-          }if (f) {
-            g = d.keyBinds[b];break;
-          }
-        }
-      }g && (g.call(l, o), a.stopPropagation(), a.preventDefault());
-    },
-        ja = function ja(a) {
-      w[a.which] = "r", a.stopPropagation(), a.preventDefault();
-    },
-        ka = function ka(b) {
-      var c = a(b.target).val().trim(),
-          d = c ? da(c) : null;return aa(d), b.stopImmediatePropagation(), !1;
-    },
-        la = function la() {
-      g.on({ change: ka, blur: d.debug ? "" : ba, keydown: ia, keyup: ja, focus: d.allowInputToggle ? ga : "" }), _c.is("input") ? g.on({ focus: ga }) : n && (n.on("click", ha), n.on("mousedown", !1));
-    },
-        ma = function ma() {
-      g.off({ change: ka, blur: blur, keydown: ia, keyup: ja, focus: d.allowInputToggle ? ba : "" }), _c.is("input") ? g.off({ focus: ga }) : n && (n.off("click", ha), n.off("mousedown", !1));
-    },
-        na = function na(b) {
-      var c = {};return a.each(b, function () {
-        var a = da(this);a.isValid() && (c[a.format("YYYY-MM-DD")] = !0);
-      }), !!Object.keys(c).length && c;
-    },
-        oa = function oa(b) {
-      var c = {};return a.each(b, function () {
-        c[this] = !0;
-      }), !!Object.keys(c).length && c;
-    },
-        pa = function pa() {
-      var a = d.format || "L LT";i = a.replace(/(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, function (a) {
-        var b = e.localeData().longDateFormat(a) || a;return b.replace(/(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, function (a) {
-          return e.localeData().longDateFormat(a) || a;
-        });
-      }), j = d.extraFormats ? d.extraFormats.slice() : [], j.indexOf(a) < 0 && j.indexOf(i) < 0 && j.push(i), h = i.toLowerCase().indexOf("a") < 1 && i.replace(/\[.*?\]/g, "").indexOf("h") < 1, z("y") && (p = 2), z("M") && (p = 1), z("d") && (p = 0), k = Math.max(p, k), m || aa(e);
-    };if (l.destroy = function () {
-      ba(), ma(), _c.removeData("DateTimePicker"), _c.removeData("date");
-    }, l.toggle = ha, l.show = ga, l.hide = ba, l.disable = function () {
-      return ba(), n && n.hasClass("btn") && n.addClass("disabled"), g.prop("disabled", !0), l;
-    }, l.enable = function () {
-      return n && n.hasClass("btn") && n.removeClass("disabled"), g.prop("disabled", !1), l;
-    }, l.ignoreReadonly = function (a) {
-      if (0 === arguments.length) return d.ignoreReadonly;if ("boolean" != typeof a) throw new TypeError("ignoreReadonly () expects a boolean parameter");return d.ignoreReadonly = a, l;
-    }, l.options = function (b) {
-      if (0 === arguments.length) return a.extend(!0, {}, d);if (!(b instanceof Object)) throw new TypeError("options() options parameter should be an object");return a.extend(!0, d, b), a.each(d, function (a, b) {
-        if (void 0 === l[a]) throw new TypeError("option " + a + " is not recognized!");l[a](b);
-      }), l;
-    }, l.date = function (a) {
-      if (0 === arguments.length) return m ? null : e.clone();if (!(null === a || "string" == typeof a || b.isMoment(a) || a instanceof Date)) throw new TypeError("date() parameter must be one of [null, string, moment or Date]");return aa(null === a ? null : da(a)), l;
-    }, l.format = function (a) {
-      if (0 === arguments.length) return d.format;if ("string" != typeof a && ("boolean" != typeof a || a !== !1)) throw new TypeError("format() expects a string or boolean:false parameter " + a);return d.format = a, i && pa(), l;
-    }, l.timeZone = function (a) {
-      if (0 === arguments.length) return d.timeZone;if ("string" != typeof a) throw new TypeError("newZone() expects a string parameter");return d.timeZone = a, l;
-    }, l.dayViewHeaderFormat = function (a) {
-      if (0 === arguments.length) return d.dayViewHeaderFormat;if ("string" != typeof a) throw new TypeError("dayViewHeaderFormat() expects a string parameter");return d.dayViewHeaderFormat = a, l;
-    }, l.extraFormats = function (a) {
-      if (0 === arguments.length) return d.extraFormats;if (a !== !1 && !(a instanceof Array)) throw new TypeError("extraFormats() expects an array or false parameter");return d.extraFormats = a, j && pa(), l;
-    }, l.disabledDates = function (b) {
-      if (0 === arguments.length) return d.disabledDates ? a.extend({}, d.disabledDates) : d.disabledDates;if (!b) return d.disabledDates = !1, _(), l;if (!(b instanceof Array)) throw new TypeError("disabledDates() expects an array parameter");return d.disabledDates = na(b), d.enabledDates = !1, _(), l;
-    }, l.enabledDates = function (b) {
-      if (0 === arguments.length) return d.enabledDates ? a.extend({}, d.enabledDates) : d.enabledDates;if (!b) return d.enabledDates = !1, _(), l;if (!(b instanceof Array)) throw new TypeError("enabledDates() expects an array parameter");return d.enabledDates = na(b), d.disabledDates = !1, _(), l;
-    }, l.daysOfWeekDisabled = function (a) {
-      if (0 === arguments.length) return d.daysOfWeekDisabled.splice(0);if ("boolean" == typeof a && !a) return d.daysOfWeekDisabled = !1, _(), l;if (!(a instanceof Array)) throw new TypeError("daysOfWeekDisabled() expects an array parameter");if (d.daysOfWeekDisabled = a.reduce(function (a, b) {
-        return b = parseInt(b, 10), b > 6 || b < 0 || isNaN(b) ? a : (a.indexOf(b) === -1 && a.push(b), a);
-      }, []).sort(), d.useCurrent && !d.keepInvalid) {
-        for (var b = 0; !R(e, "d");) {
-          if (e.add(1, "d"), 31 === b) throw "Tried 31 times to find a valid date";b++;
-        }aa(e);
-      }return _(), l;
-    }, l.maxDate = function (a) {
-      if (0 === arguments.length) return d.maxDate ? d.maxDate.clone() : d.maxDate;if ("boolean" == typeof a && a === !1) return d.maxDate = !1, _(), l;"string" == typeof a && ("now" !== a && "moment" !== a || (a = y()));var b = da(a);if (!b.isValid()) throw new TypeError("maxDate() Could not parse date parameter: " + a);if (d.minDate && b.isBefore(d.minDate)) throw new TypeError("maxDate() date parameter is before options.minDate: " + b.format(i));return d.maxDate = b, d.useCurrent && !d.keepInvalid && e.isAfter(a) && aa(d.maxDate), f.isAfter(b) && (f = b.clone().subtract(d.stepping, "m")), _(), l;
-    }, l.minDate = function (a) {
-      if (0 === arguments.length) return d.minDate ? d.minDate.clone() : d.minDate;if ("boolean" == typeof a && a === !1) return d.minDate = !1, _(), l;"string" == typeof a && ("now" !== a && "moment" !== a || (a = y()));var b = da(a);if (!b.isValid()) throw new TypeError("minDate() Could not parse date parameter: " + a);if (d.maxDate && b.isAfter(d.maxDate)) throw new TypeError("minDate() date parameter is after options.maxDate: " + b.format(i));return d.minDate = b, d.useCurrent && !d.keepInvalid && e.isBefore(a) && aa(d.minDate), f.isBefore(b) && (f = b.clone().add(d.stepping, "m")), _(), l;
-    }, l.defaultDate = function (a) {
-      if (0 === arguments.length) return d.defaultDate ? d.defaultDate.clone() : d.defaultDate;if (!a) return d.defaultDate = !1, l;"string" == typeof a && (a = "now" === a || "moment" === a ? y() : y(a));var b = da(a);if (!b.isValid()) throw new TypeError("defaultDate() Could not parse date parameter: " + a);if (!R(b)) throw new TypeError("defaultDate() date passed is invalid according to component setup validations");return d.defaultDate = b, (d.defaultDate && d.inline || "" === g.val().trim()) && aa(d.defaultDate), l;
-    }, l.locale = function (a) {
-      if (0 === arguments.length) return d.locale;if (!b.localeData(a)) throw new TypeError("locale() locale " + a + " is not loaded from moment locales!");return d.locale = a, e.locale(d.locale), f.locale(d.locale), i && pa(), o && (ba(), ga()), l;
-    }, l.stepping = function (a) {
-      return 0 === arguments.length ? d.stepping : (a = parseInt(a, 10), (isNaN(a) || a < 1) && (a = 1), d.stepping = a, l);
-    }, l.useCurrent = function (a) {
-      var b = ["year", "month", "day", "hour", "minute"];if (0 === arguments.length) return d.useCurrent;if ("boolean" != typeof a && "string" != typeof a) throw new TypeError("useCurrent() expects a boolean or string parameter");if ("string" == typeof a && b.indexOf(a.toLowerCase()) === -1) throw new TypeError("useCurrent() expects a string parameter of " + b.join(", "));return d.useCurrent = a, l;
-    }, l.collapse = function (a) {
-      if (0 === arguments.length) return d.collapse;if ("boolean" != typeof a) throw new TypeError("collapse() expects a boolean parameter");return d.collapse === a ? l : (d.collapse = a, o && (ba(), ga()), l);
-    }, l.icons = function (b) {
-      if (0 === arguments.length) return a.extend({}, d.icons);if (!(b instanceof Object)) throw new TypeError("icons() expects parameter to be an Object");return a.extend(d.icons, b), o && (ba(), ga()), l;
-    }, l.tooltips = function (b) {
-      if (0 === arguments.length) return a.extend({}, d.tooltips);if (!(b instanceof Object)) throw new TypeError("tooltips() expects parameter to be an Object");return a.extend(d.tooltips, b), o && (ba(), ga()), l;
-    }, l.useStrict = function (a) {
-      if (0 === arguments.length) return d.useStrict;if ("boolean" != typeof a) throw new TypeError("useStrict() expects a boolean parameter");return d.useStrict = a, l;
-    }, l.sideBySide = function (a) {
-      if (0 === arguments.length) return d.sideBySide;if ("boolean" != typeof a) throw new TypeError("sideBySide() expects a boolean parameter");return d.sideBySide = a, o && (ba(), ga()), l;
-    }, l.viewMode = function (a) {
-      if (0 === arguments.length) return d.viewMode;if ("string" != typeof a) throw new TypeError("viewMode() expects a string parameter");if (r.indexOf(a) === -1) throw new TypeError("viewMode() parameter must be one of (" + r.join(", ") + ") value");return d.viewMode = a, k = Math.max(r.indexOf(a), p), L(), l;
-    }, l.toolbarPlacement = function (a) {
-      if (0 === arguments.length) return d.toolbarPlacement;if ("string" != typeof a) throw new TypeError("toolbarPlacement() expects a string parameter");if (u.indexOf(a) === -1) throw new TypeError("toolbarPlacement() parameter must be one of (" + u.join(", ") + ") value");return d.toolbarPlacement = a, o && (ba(), ga()), l;
-    }, l.widgetPositioning = function (b) {
-      if (0 === arguments.length) return a.extend({}, d.widgetPositioning);if ("[object Object]" !== {}.toString.call(b)) throw new TypeError("widgetPositioning() expects an object variable");if (b.horizontal) {
-        if ("string" != typeof b.horizontal) throw new TypeError("widgetPositioning() horizontal variable must be a string");if (b.horizontal = b.horizontal.toLowerCase(), t.indexOf(b.horizontal) === -1) throw new TypeError("widgetPositioning() expects horizontal parameter to be one of (" + t.join(", ") + ")");d.widgetPositioning.horizontal = b.horizontal;
-      }if (b.vertical) {
-        if ("string" != typeof b.vertical) throw new TypeError("widgetPositioning() vertical variable must be a string");if (b.vertical = b.vertical.toLowerCase(), s.indexOf(b.vertical) === -1) throw new TypeError("widgetPositioning() expects vertical parameter to be one of (" + s.join(", ") + ")");d.widgetPositioning.vertical = b.vertical;
-      }return _(), l;
-    }, l.calendarWeeks = function (a) {
-      if (0 === arguments.length) return d.calendarWeeks;if ("boolean" != typeof a) throw new TypeError("calendarWeeks() expects parameter to be a boolean value");return d.calendarWeeks = a, _(), l;
-    }, l.showTodayButton = function (a) {
-      if (0 === arguments.length) return d.showTodayButton;if ("boolean" != typeof a) throw new TypeError("showTodayButton() expects a boolean parameter");return d.showTodayButton = a, o && (ba(), ga()), l;
-    }, l.showClear = function (a) {
-      if (0 === arguments.length) return d.showClear;if ("boolean" != typeof a) throw new TypeError("showClear() expects a boolean parameter");return d.showClear = a, o && (ba(), ga()), l;
-    }, l.widgetParent = function (b) {
-      if (0 === arguments.length) return d.widgetParent;if ("string" == typeof b && (b = a(b)), null !== b && "string" != typeof b && !(b instanceof a)) throw new TypeError("widgetParent() expects a string or a jQuery object parameter");return d.widgetParent = b, o && (ba(), ga()), l;
-    }, l.keepOpen = function (a) {
-      if (0 === arguments.length) return d.keepOpen;if ("boolean" != typeof a) throw new TypeError("keepOpen() expects a boolean parameter");return d.keepOpen = a, l;
-    }, l.focusOnShow = function (a) {
-      if (0 === arguments.length) return d.focusOnShow;if ("boolean" != typeof a) throw new TypeError("focusOnShow() expects a boolean parameter");return d.focusOnShow = a, l;
-    }, l.inline = function (a) {
-      if (0 === arguments.length) return d.inline;if ("boolean" != typeof a) throw new TypeError("inline() expects a boolean parameter");return d.inline = a, l;
-    }, l.clear = function () {
-      return ca(), l;
-    }, l.keyBinds = function (a) {
-      return 0 === arguments.length ? d.keyBinds : (d.keyBinds = a, l);
-    }, l.getMoment = function (a) {
-      return y(a);
-    }, l.debug = function (a) {
-      if ("boolean" != typeof a) throw new TypeError("debug() expects a boolean parameter");return d.debug = a, l;
-    }, l.allowInputToggle = function (a) {
-      if (0 === arguments.length) return d.allowInputToggle;if ("boolean" != typeof a) throw new TypeError("allowInputToggle() expects a boolean parameter");return d.allowInputToggle = a, l;
-    }, l.showClose = function (a) {
-      if (0 === arguments.length) return d.showClose;if ("boolean" != typeof a) throw new TypeError("showClose() expects a boolean parameter");return d.showClose = a, l;
-    }, l.keepInvalid = function (a) {
-      if (0 === arguments.length) return d.keepInvalid;if ("boolean" != typeof a) throw new TypeError("keepInvalid() expects a boolean parameter");
-      return d.keepInvalid = a, l;
-    }, l.datepickerInput = function (a) {
-      if (0 === arguments.length) return d.datepickerInput;if ("string" != typeof a) throw new TypeError("datepickerInput() expects a string parameter");return d.datepickerInput = a, l;
-    }, l.parseInputDate = function (a) {
-      if (0 === arguments.length) return d.parseInputDate;if ("function" != typeof a) throw new TypeError("parseInputDate() sholud be as function");return d.parseInputDate = a, l;
-    }, l.disabledTimeIntervals = function (b) {
-      if (0 === arguments.length) return d.disabledTimeIntervals ? a.extend({}, d.disabledTimeIntervals) : d.disabledTimeIntervals;if (!b) return d.disabledTimeIntervals = !1, _(), l;if (!(b instanceof Array)) throw new TypeError("disabledTimeIntervals() expects an array parameter");return d.disabledTimeIntervals = b, _(), l;
-    }, l.disabledHours = function (b) {
-      if (0 === arguments.length) return d.disabledHours ? a.extend({}, d.disabledHours) : d.disabledHours;if (!b) return d.disabledHours = !1, _(), l;if (!(b instanceof Array)) throw new TypeError("disabledHours() expects an array parameter");if (d.disabledHours = oa(b), d.enabledHours = !1, d.useCurrent && !d.keepInvalid) {
-        for (var c = 0; !R(e, "h");) {
-          if (e.add(1, "h"), 24 === c) throw "Tried 24 times to find a valid date";c++;
-        }aa(e);
-      }return _(), l;
-    }, l.enabledHours = function (b) {
-      if (0 === arguments.length) return d.enabledHours ? a.extend({}, d.enabledHours) : d.enabledHours;if (!b) return d.enabledHours = !1, _(), l;if (!(b instanceof Array)) throw new TypeError("enabledHours() expects an array parameter");if (d.enabledHours = oa(b), d.disabledHours = !1, d.useCurrent && !d.keepInvalid) {
-        for (var c = 0; !R(e, "h");) {
-          if (e.add(1, "h"), 24 === c) throw "Tried 24 times to find a valid date";c++;
-        }aa(e);
-      }return _(), l;
-    }, l.viewDate = function (a) {
-      if (0 === arguments.length) return f.clone();if (!a) return f = e.clone(), l;if (!("string" == typeof a || b.isMoment(a) || a instanceof Date)) throw new TypeError("viewDate() parameter must be one of [string, moment or Date]");return f = da(a), K(), l;
-    }, _c.is("input")) g = _c;else if (g = _c.find(d.datepickerInput), 0 === g.length) g = _c.find("input");else if (!g.is("input")) throw new Error('CSS class "' + d.datepickerInput + '" cannot be applied to non input element');if (_c.hasClass("input-group") && (n = 0 === _c.find(".datepickerbutton").length ? _c.find(".input-group-addon") : _c.find(".datepickerbutton")), !d.inline && !g.is("input")) throw new Error("Could not initialize DateTimePicker without an input element");return e = y(), f = e.clone(), a.extend(!0, d, H()), l.options(d), pa(), la(), g.prop("disabled") && l.disable(), g.is("input") && 0 !== g.val().trim().length ? aa(da(g.val().trim())) : d.defaultDate && void 0 === g.attr("placeholder") && aa(d.defaultDate), d.inline && ga(), l;
-  };return a.fn.datetimepicker = function (b) {
-    b = b || {};var d,
-        e = Array.prototype.slice.call(arguments, 1),
-        f = !0,
-        g = ["destroy", "hide", "show", "toggle"];if ("object" == (typeof b === "undefined" ? "undefined" : _typeof(b))) return this.each(function () {
-      var d,
-          e = a(this);e.data("DateTimePicker") || (d = a.extend(!0, {}, a.fn.datetimepicker.defaults, b), e.data("DateTimePicker", c(e, d)));
-    });if ("string" == typeof b) return this.each(function () {
-      var c = a(this),
-          g = c.data("DateTimePicker");if (!g) throw new Error('bootstrap-datetimepicker("' + b + '") method was called on an element that is not using DateTimePicker');d = g[b].apply(g, e), f = d === g;
-    }), f || a.inArray(b, g) > -1 ? this : d;throw new TypeError("Invalid arguments for DateTimePicker: " + b);
-  }, a.fn.datetimepicker.defaults = { timeZone: "", format: !1, dayViewHeaderFormat: "MMMM YYYY", extraFormats: !1, stepping: 1, minDate: !1, maxDate: !1, useCurrent: !0, collapse: !0, locale: b.locale(), defaultDate: !1, disabledDates: !1, enabledDates: !1, icons: { time: "glyphicon glyphicon-time", date: "glyphicon glyphicon-calendar", up: "glyphicon glyphicon-chevron-up", down: "glyphicon glyphicon-chevron-down", previous: "glyphicon glyphicon-chevron-left", next: "glyphicon glyphicon-chevron-right", today: "glyphicon glyphicon-screenshot", clear: "glyphicon glyphicon-trash", close: "glyphicon glyphicon-remove" }, tooltips: { today: "Go to today", clear: "Clear selection", close: "Close the picker", selectMonth: "Select Month", prevMonth: "Previous Month", nextMonth: "Next Month", selectYear: "Select Year", prevYear: "Previous Year", nextYear: "Next Year", selectDecade: "Select Decade", prevDecade: "Previous Decade", nextDecade: "Next Decade", prevCentury: "Previous Century", nextCentury: "Next Century", pickHour: "Pick Hour", incrementHour: "Increment Hour", decrementHour: "Decrement Hour", pickMinute: "Pick Minute", incrementMinute: "Increment Minute", decrementMinute: "Decrement Minute", pickSecond: "Pick Second", incrementSecond: "Increment Second", decrementSecond: "Decrement Second", togglePeriod: "Toggle Period", selectTime: "Select Time" }, useStrict: !1, sideBySide: !1, daysOfWeekDisabled: !1, calendarWeeks: !1, viewMode: "days", toolbarPlacement: "default", showTodayButton: !1, showClear: !1, showClose: !1, widgetPositioning: { horizontal: "auto", vertical: "auto" }, widgetParent: null, ignoreReadonly: !1, keepOpen: !1, focusOnShow: !0, inline: !1, keepInvalid: !1, datepickerInput: ".datepickerinput", keyBinds: { up: function up(a) {
-        if (a) {
-          var b = this.date() || this.getMoment();a.find(".datepicker").is(":visible") ? this.date(b.clone().subtract(7, "d")) : this.date(b.clone().add(this.stepping(), "m"));
-        }
-      }, down: function down(a) {
-        if (!a) return void this.show();var b = this.date() || this.getMoment();a.find(".datepicker").is(":visible") ? this.date(b.clone().add(7, "d")) : this.date(b.clone().subtract(this.stepping(), "m"));
-      }, "control up": function controlUp(a) {
-        if (a) {
-          var b = this.date() || this.getMoment();a.find(".datepicker").is(":visible") ? this.date(b.clone().subtract(1, "y")) : this.date(b.clone().add(1, "h"));
-        }
-      }, "control down": function controlDown(a) {
-        if (a) {
-          var b = this.date() || this.getMoment();a.find(".datepicker").is(":visible") ? this.date(b.clone().add(1, "y")) : this.date(b.clone().subtract(1, "h"));
-        }
-      }, left: function left(a) {
-        if (a) {
-          var b = this.date() || this.getMoment();a.find(".datepicker").is(":visible") && this.date(b.clone().subtract(1, "d"));
-        }
-      }, right: function right(a) {
-        if (a) {
-          var b = this.date() || this.getMoment();a.find(".datepicker").is(":visible") && this.date(b.clone().add(1, "d"));
-        }
-      }, pageUp: function pageUp(a) {
-        if (a) {
-          var b = this.date() || this.getMoment();a.find(".datepicker").is(":visible") && this.date(b.clone().subtract(1, "M"));
-        }
-      }, pageDown: function pageDown(a) {
-        if (a) {
-          var b = this.date() || this.getMoment();a.find(".datepicker").is(":visible") && this.date(b.clone().add(1, "M"));
-        }
-      }, enter: function enter() {
-        this.hide();
-      }, escape: function escape() {
-        this.hide();
-      }, "control space": function controlSpace(a) {
-        a && a.find(".timepicker").is(":visible") && a.find('.btn[data-action="togglePeriod"]').click();
-      }, t: function t() {
-        this.date(this.getMoment());
-      }, delete: function _delete() {
-        this.clear();
-      } }, debug: !1, allowInputToggle: !1, disabledTimeIntervals: !1, disabledHours: !1, enabledHours: !1, viewDate: !1 }, a.fn.datetimepicker;
-});
-=======
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(125)))
 
 /***/ }),
@@ -74087,7 +72714,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 __webpack_require__(127);
 module.exports = __webpack_require__(128);
 
->>>>>>> origin/master
 
 /***/ })
 /******/ ]);
