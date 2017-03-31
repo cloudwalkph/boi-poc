@@ -15,6 +15,9 @@ Auth::routes();
 
 Route::get('/home', 'RegisterController@index');
 Route::post('/update', 'RegisterController@update');
+Route::get('/extension','Front\ExtensionController@index');
+Route::get('/schedule','Front\ScheduleController@index');
+Route::get('/schedule-confirmation','Front\ScheduleController@confirm');
 
 Route::get('/', function () {
     return view('register');
@@ -26,6 +29,5 @@ Route::get('/schedule', function () {
 Route::get('/schedule-confirmation', function () {
     return view('schedule_confirmed');
 });
-Route::get('visa-history', function () {
-    return view('history');
-});
+
+Route::get('/visa-history', 'Visa\VisaHistoryController@index');
