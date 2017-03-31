@@ -60,11 +60,13 @@
                                <h3>YOU SELECTED</h3>
 
                                <p style="font-size: 15px;">
-                                   May 25, 2017, Thursday PM <br>
-                                   <span style="font-size: 15px;" class="text-primary">
+                                   <span id="selectedDate">May 25, 2017, Thursday PM</span> <br>
+                                   <span id="selectedBranch" style="font-size: 15px;" class="text-primary">
                                        Bureau of Immigration Main Office
                                    </span> <br>
-                                   Magallanes Drive, Intramuros Manila 1002
+                                   <span id="selectedBranchAddress">
+                                       Magallanes Drive, Intramuros Manila 1002
+                                   </span>
                                </p>
                            </div>
                             <div class="col-md-4">
@@ -103,10 +105,10 @@
                                             <td>Express Fee</td>
                                             <td class="text-right">1000.00</td>
                                         </tr>
-                                        <tr>
-                                            <td>Fine for Overstaying - (additional)</td>
-                                            <td class="text-right">1000.00</td>
-                                        </tr>
+                                        {{--<tr>--}}
+                                            {{--<td>Fine for Overstaying - (additional)</td>--}}
+                                            {{--<td class="text-right">1000.00</td>--}}
+                                        {{--</tr>--}}
                                     </tbody>
                                 </table>
                             </div>
@@ -120,7 +122,7 @@
                                     <tbody>
                                         <tr>
                                             <td class="text-primary"><strong>TOTAL</strong></td>
-                                            <td class="text-primary text-right"><strong>Php 4,280.00</strong></td>
+                                            <td class="text-primary text-right"><strong>Php 3,280.00</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -237,6 +239,12 @@
                             $('.calendar').fullCalendar('renderEvents', res.data, true);
                         });
                     }
+                },
+                eventClick: function(event, jsEvent, view) {
+                    console.log(event);
+                    $('#selectedDate').html(event.start.format('LL'));
+                    $('#selectedBranch').html(event.branch);
+                    $('#selectedBranchAddress').html(event.address);
                 }
                 // events: events
             });
