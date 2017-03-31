@@ -28,6 +28,8 @@ class CreateUsersRequest extends FormRequest
             'profile.last_name'      => 'required',
             'profile.birthday'       => 'required|date',
             'profile.gender'         => 'required',
+            'characterReference.country' => 'required',
+            'alias.alias'            => 'required',
         ];
     }
 }

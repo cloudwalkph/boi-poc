@@ -385,7 +385,7 @@
 					</div>
 					<div class="row rowMargin">
 						<div class="col-md-4 col-md-offset-4">
-							<button class="btn btn-primary btn-lg btn-block">SUBMIT</button>
+							<a href="/schedule" class="btn btn-primary btn-lg btn-block">SUBMIT</a>
 						</div>
 					</div>
 				</form>	
