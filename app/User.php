@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Appointment;
 use App\Models\CharacterReference;
 use App\Models\TravelInformation;
 use App\Models\UserAddress;
@@ -76,5 +77,10 @@ class User extends Authenticatable
     public function aliases()
     {
         return $this->hasMany(UserAlias::class);
+    }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
     }
 }
