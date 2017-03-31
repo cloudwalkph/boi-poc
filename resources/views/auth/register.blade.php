@@ -78,12 +78,12 @@
                 </div>
 
                 <div class="col-md-12">
-                    <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                        <label for="password-confirm" class="control-label">Confirm Password</label>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                        @if ($errors->has('password_confirmation'))
+                    <div class="form-group{{ $errors->has('registerPassword_confirmation') ? ' has-error' : '' }}">
+                        <label for="registerPassword-confirm" class="control-label">Confirm Password</label>
+                        <input id="registerPassword-confirm" type="password" class="form-control" name="registerPassword_confirmation" required>
+                        @if ($errors->has('registerPassword_confirmation'))
                             <span class="help-block">
-                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+                            <strong>{{ $errors->first('registerPassword_confirmation') }}</strong>
                         </span>
                         @endif
                     </div>
