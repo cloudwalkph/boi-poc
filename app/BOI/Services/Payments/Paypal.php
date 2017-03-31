@@ -51,8 +51,8 @@ class Paypal extends Controller
             ->setDescription('Visa Extension Payment - Bureao of Immigration');
 
         $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(url('/'))
-            ->setCancelUrl(url('/'));
+        $redirect_urls->setReturnUrl(url('/schedule-confirmation'))
+            ->setCancelUrl(url('/schedule-confirmation'));
 
         $payment = new Payment();
         $payment->setIntent('sale')
