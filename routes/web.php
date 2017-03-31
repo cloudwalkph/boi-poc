@@ -21,6 +21,12 @@ Route::get('/', function () {
     return view('register');
 });
 
-Route::get('/payment', function () {
-    return view('payment');
+Route::get('/schedule', function () {
+    return view('schedule');
+});
+Route::get('/schedule-confirmation', function () {
+    return view('schedule_confirmed');
+});
+Route::get('visa-history', function () {
+    return view('history');
 });

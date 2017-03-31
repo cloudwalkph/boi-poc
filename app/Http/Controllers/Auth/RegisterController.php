@@ -49,8 +49,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'profile.first_name' => 'required|max:255',
+            'travel.passport_number' => 'required|max:255',
+            'profile.birthday' => 'required|date',
             'profile.last_name' => 'required|max:255',
-            'registerEmail' => 'required|email|max:255|unique:users',
+            'registerEmail' => 'required|email|max:255|unique:users,email',
             'registerPassword' => 'required|min:6|confirmed',
         ]);
     }
@@ -70,6 +72,7 @@ class RegisterController extends Controller
         ]);
 
         $user->profile()->create($data['profile']);
+        $user->travel_informations()->create($data['travel']);
 
         return $user;
     }
