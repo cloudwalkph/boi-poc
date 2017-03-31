@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Purpose extends Model
 {
     use SoftDeletes;
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }
