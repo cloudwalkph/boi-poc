@@ -2,11 +2,7 @@
 
 @section('content')
     <div class="content" id="scheduleImg">
-<<<<<<< HEAD
-        <div class="img-overlay"></div>
-=======
         <div class="auth-overlay"></div>
->>>>>>> origin/master
         <div class="schedule-heading">
             <h1 style="color: #fff">Schedule your Appointment</h1>
         </div>
@@ -177,16 +173,9 @@
                             </div>
 
                         </div>
-<<<<<<< HEAD
-
-                        <div class="form-group">
-                            <div class="col-md-3 col-md-offset-9">
-                                <button type="submit" class="btn btn-primary btn-block">
-=======
                         <div class="form-group">
                             <div class="col-md-3 col-md-offset-9">
                                 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#offerIdModal">
->>>>>>> origin/master
                                     CHECKOUT
                                 </button>
                             </div>
@@ -197,10 +186,7 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-=======
     @include('modals.offer')
->>>>>>> origin/master
 
 @endsection
 
