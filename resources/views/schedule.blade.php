@@ -1,5 +1,21 @@
 @extends('layouts.app')
 
+@section('styles')
+    <style>
+        .fc-content {
+            text-align: center;
+        }
+
+        .fc-content:hover {
+            background-color: #aca36c;
+        }
+
+        .fc-content:active {
+            background-color: #aca36c;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="content" id="scheduleImg">
         <div class="auth-overlay"></div>
@@ -204,15 +220,33 @@
                 navLinks: true, // can click day/week names to navigate views
                 // businessHours: true, // display business hours
                 editable: true,
+                eventRender: function(event, element) {
+                    let $title = element.find( '.fc-title' );
+                    $title.html( $title.text() );
+                },
+                eventColor: '#48A6F3',
+                viewRender: function (view, element) {
+                    let b = $('.calendar').fullCalendar('getDate');
+                    let date = b.format('YYYY-MM-DD');
+
+                    let branchId = $('#branch_id').val();
+
+                    if (branchId > 0) {
+                        $('.calendar').fullCalendar('removeEvents');
+                        axios.get(`/api/v1/branches/${branchId}/slots?date=${date}`).then((res) => {
+                            $('.calendar').fullCalendar('renderEvents', res.data, true);
+                        });
+                    }
+                }
                 // events: events
             });
-
 
             $('#branch_id').on('change', function() {
                 let branchId = $(this).val();
 
+                $('.calendar').fullCalendar('removeEvents');
                 axios.get(`/api/v1/branches/${branchId}/slots`).then((res) => {
-                    console.log(res);
+                    $('.calendar').fullCalendar('renderEvents', res.data, true);
                 });
             });
         });

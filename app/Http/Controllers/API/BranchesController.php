@@ -30,16 +30,28 @@ class BranchesController extends Controller {
 
         $slots = [];
         for ($i = 1; $i <= $currentDate->daysInMonth; $i++) {
-            $activeDate = Carbon::create($currentDate->year, $currentDate->month, $i)->toDateString();
+            $activeDate = Carbon::create($currentDate->year, $currentDate->month, $i);
+
+            if ($activeDate->isWeekend()) {
+                continue;
+            }
+
+            if ($activeDate->isPast()) {
+                continue;
+            }
+
+            $activeDate = $activeDate->toDateString();
 
             $slots[] = [
-                'date'  => $activeDate,
-                'label' => 'AM <br/>' . $this->getSlotCount('am', $activeDate, $branch) . ' slot'
+                'start'  => $activeDate,
+                'allDay'    => true,
+                'title' => 'AM <br/>' . $this->getSlotCount('am', $activeDate, $branch) . ' slot'
             ];
 
             $slots[] = [
-                'date'  => $activeDate,
-                'label' => 'PM <br/>' . $this->getSlotCount('pm', $activeDate, $branch) . ' slot'
+                'start'  => $activeDate,
+                'allDay'    => true,
+                'title' => 'PM <br/>' . $this->getSlotCount('pm', $activeDate, $branch) . ' slot'
             ];
         }
 
