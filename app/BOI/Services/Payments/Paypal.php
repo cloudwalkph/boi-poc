@@ -48,11 +48,11 @@ class Paypal extends Controller
         $transaction->setAmount($amount)
             ->setInvoiceNumber($id)
             ->setItemList($item_list)
-            ->setDescription('Booking payment for vireef');
+            ->setDescription('Visa Extension Payment - Bureao of Immigration');
 
         $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(url('/payments/' . $id . '/paypal'))
-            ->setCancelUrl(url('/payments/' . $id . '/paypal/cancel'));
+        $redirect_urls->setReturnUrl(url('/'))
+            ->setCancelUrl(url('/'));
 
         $payment = new Payment();
         $payment->setIntent('sale')
